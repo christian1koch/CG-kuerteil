@@ -33,6 +33,21 @@ function Scene() {
 		}
 	);
 
+	// GUI controls for OptionSquare
+	const {
+		squareSize,
+		squareColor,
+		squareHoverScale,
+		squarePosition,
+		squareRotation,
+	} = useControls("Option Square", {
+		squareSize: { value: 1, min: 0.1, max: 3, step: 0.1 },
+		squareColor: "#3fb",
+		squareHoverScale: { value: 1.4, min: 1, max: 2, step: 0.05 },
+		squarePosition: { value: [0, 0, 0], step: 0.1 },
+		squareRotation: { value: [0, 0, 0], step: 0.1 },
+	});
+
 	useHelper(dirLight, THREE.DirectionalLightHelper, 1, "red");
 
 	return (
@@ -47,10 +62,11 @@ function Scene() {
 			<OrbitControls />
 			<CartoonModel />
 			<OptionSquare
-				size={1}
-				color="#3fb"
-				hoverScale={1.4}
-				position={[0, 0, 0]}
+				size={squareSize}
+				color={squareColor}
+				hoverScale={squareHoverScale}
+				position={squarePosition as [number, number, number]}
+				rotation={squareRotation as [number, number, number]}
 				onClick={() => console.log("clicked")}
 			/>
 			<mesh position={[0, -2, 0]}>
