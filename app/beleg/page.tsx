@@ -14,11 +14,17 @@ import {
   Stage,
   Stars,
 } from "@react-three/drei";
+import { useThree } from "@react-three/fiber";
+import {
+  EffectComposer,
+  Outline,
+  Selection,
+} from "@react-three/postprocessing";
 
 export default function Beleg() {
   return (
     <div className="h-screen bg-blue-300">
-      <Canvas shadows dpr={[1, 2]} camera={{ position: [0, 5, 10], fov: 50 }}>
+      <Canvas shadows="soft" camera={{ position: [0, 5, 10] }}>
         <SceneContainer />
       </Canvas>
     </div>
@@ -28,16 +34,39 @@ export default function Beleg() {
 function SceneContainer() {
   return (
     <>
-      <OrbitControls />
-      <Scene castShadow receiveShadow />
+      <Selection>
+        <EffectComposer autoClear={false}>
+          <Outline blur edgeStrength={100} />
+        </EffectComposer>
+        <OrbitControls />
+        <Scene castShadow receiveShadow />
+      </Selection>
       <PerspectiveCamera makeDefault position={[0, 5, 10]} />
-      <ambientLight intensity={0.5} color={"yellow"} />
-      <pointLight
-        shadow-bias={-0.00001}
+      <ambientLight intensity={1} />
+      <directionalLight
         castShadow
-        intensity={10}
-        position={[1, 2, 0]}
+        intensity={1}
+        shadow-bias={-0.0001}
+        position={[5, 10, 7.5]}
       />
     </>
   );
+}
+
+function useGetCameraPosAndRot() {
+  const { camera } = useThree();
+
+  const handleOrbitChange = () => {
+    console.log("Camera Position:", {
+      x: camera.position.x.toFixed(3),
+      y: camera.position.y.toFixed(3),
+      z: camera.position.z.toFixed(3),
+    });
+    console.log("Camera Rotation:", {
+      x: camera.rotation.x.toFixed(3),
+      y: camera.rotation.y.toFixed(3),
+      z: camera.rotation.z.toFixed(3),
+    });
+    return handleOrbitChange;
+  };
 }

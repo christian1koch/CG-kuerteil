@@ -6,6 +6,8 @@ import React, { useRef } from "react";
 import { useGLTF } from "@react-three/drei";
 import { ThreeElements } from "@react-three/fiber";
 import { MeshStandardMaterial } from "three";
+import { Book } from "./Book";
+import { Envelope } from "./Envelope";
 
 export function Scene(props: ThreeElements["group"]) {
   const { nodes, materials } = useGLTF("/Scene1.glb") as any;
@@ -24,44 +26,9 @@ export function Scene(props: ThreeElements["group"]) {
         receiveShadow
         geometry={nodes.bed_single_A.geometry}
         material={materials["furniture_texture.008"]}
-        position={[-1.787, 0.166, -0.062]}
-      ></mesh>
-      <group
-        position={[1.291, 0.801, -0.539]}
-        rotation={[0, 0.167, 0]}
-        scale={0.458}
-      >
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Plane046.geometry}
-          material={materials["Book Cover"]}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Plane046_1.geometry}
-          material={materials["Book Page 33"]}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Plane046_2.geometry}
-          material={materials.Pencil}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Plane046_3.geometry}
-          material={materials.Eraser}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Plane046_4.geometry}
-          material={materials["Pencil 2"]}
-        />
-      </group>
+        position={[-1.787, 0.097, -0.062]}
+      />
+      <Book />
       <mesh
         castShadow
         receiveShadow
@@ -105,43 +72,21 @@ export function Scene(props: ThreeElements["group"]) {
         position={[1.795, 0.096, -0.912]}
         scale={0.672}
       />
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.wall_panelled_bakery_corner_inner.geometry}
-        material={materials["tiny_treats_1.065"]}
-        position={[-2.944, 0, -1.869]}
-      />
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.wall_panelled_bakery_straight.geometry}
-        material={materials["tiny_treats_1.068"]}
-        position={[0, 0, -1.869]}
-      />
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.wall_panelled_bakery_straight001.geometry}
-        material={materials["tiny_treats_1.068"]}
-        position={[-2.942, 0, 1.131]}
-        rotation={[0, 1.571, 0]}
-      />
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.wall_panelled_bakery_straight002.geometry}
-        material={materials["tiny_treats_1.068"]}
-        position={[2, 0, -1.869]}
-      />
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.Envelope.geometry}
-        material={nodes.Envelope.material}
-        position={[2.32, 0.771, -0.616]}
-        scale={[0.213, 0.15, 0.113]}
-      />
+      <group position={[-2.942, 0, 1.131]} rotation={[0, 1.571, 0]}>
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.wall_panelled_bakery_straight001_1.geometry}
+          material={materials["tiny_treats_1.068"]}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.wall_panelled_bakery_straight001_2.geometry}
+          material={materials["tiny_treats_1.065"]}
+        />
+      </group>
+      <Envelope />
       <mesh
         castShadow
         receiveShadow
@@ -390,7 +335,7 @@ export function Scene(props: ThreeElements["group"]) {
         receiveShadow
         geometry={nodes.wall_modular_tiles_kitchen_corner_outer_B001.geometry}
         material={materials["tiny_treats_1.074"]}
-        position={[-3.188, 0, -2.12]}
+        position={[-3.188, 0, -2.123]}
         rotation={[Math.PI, 1.571, 0]}
         scale={-1}
       />
@@ -399,7 +344,7 @@ export function Scene(props: ThreeElements["group"]) {
         receiveShadow
         geometry={nodes.wall_modular_tiles_kitchen_corner_outer_B002.geometry}
         material={materials["tiny_treats_1.074"]}
-        position={[-3.188, 0, -2.12]}
+        position={[-3.188, 0, -2.115]}
         rotation={[0, -1.571, 0]}
       />
       <mesh
@@ -532,7 +477,7 @@ export function Scene(props: ThreeElements["group"]) {
         receiveShadow
         geometry={nodes.floor_grass_sliced_A.geometry}
         material={materials.tiny_treats_grass}
-        position={[-8.421, 0, 1.428]}
+        position={[-8.421, 0.523, 1.428]}
         rotation={[0, 1.571, 0]}
       />
       <mesh
@@ -540,21 +485,21 @@ export function Scene(props: ThreeElements["group"]) {
         receiveShadow
         geometry={nodes.floor_grass_sliced_B.geometry}
         material={materials["tiny_treats_grass.001"]}
-        position={[-4.456, 0, -0.561]}
+        position={[-4.456, 0.523, -0.561]}
       />
       <mesh
         castShadow
         receiveShadow
         geometry={nodes.floor_grass_sliced_base.geometry}
         material={materials["tiny_treats_grass.002"]}
-        position={[-6.427, 0, -0.572]}
+        position={[-6.427, 0.523, -0.572]}
       />
       <mesh
         castShadow
         receiveShadow
         geometry={nodes.floor_grass_sliced_C.geometry}
         material={materials["tiny_treats_grass.003"]}
-        position={[-4.468, 0, 1.413]}
+        position={[-4.468, 0.523, 1.413]}
         rotation={[0, -Math.PI / 2, 0]}
       />
       <mesh
@@ -562,7 +507,7 @@ export function Scene(props: ThreeElements["group"]) {
         receiveShadow
         geometry={nodes.floor_grass_sliced_D.geometry}
         material={materials["tiny_treats_grass.004"]}
-        position={[-6.453, 0, 1.425]}
+        position={[-6.453, 0.523, 1.425]}
         rotation={[0, 1.571, 0]}
       />
       <mesh
@@ -570,14 +515,14 @@ export function Scene(props: ThreeElements["group"]) {
         receiveShadow
         geometry={nodes.floor_grass_sliced_E.geometry}
         material={materials["tiny_treats_grass.005"]}
-        position={[-8.415, 0, -0.572]}
+        position={[-8.415, 0.523, -0.572]}
       />
       <mesh
         castShadow
         receiveShadow
         geometry={nodes.hedge_corner.geometry}
         material={materials["tiny_treats_1.159"]}
-        position={[-3.863, 0, -1.666]}
+        position={[-3.863, 0, -1.613]}
         rotation={[0, -1.571, 0]}
       />
       <mesh
