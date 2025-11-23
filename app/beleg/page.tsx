@@ -14,11 +14,16 @@ import {
   Stage,
   Stars,
 } from "@react-three/drei";
+import { DirectionalLightHelper } from "three";
 import { useThree } from "@react-three/fiber";
 import {
+  Bloom,
+  DepthOfField,
   EffectComposer,
+  Noise,
   Outline,
   Selection,
+  Vignette,
 } from "@react-three/postprocessing";
 
 export default function Beleg() {
@@ -44,10 +49,16 @@ function SceneContainer() {
       <PerspectiveCamera makeDefault position={[0, 5, 10]} />
       <ambientLight intensity={1} />
       <directionalLight
+        ref={(light) => {
+          if (light) {
+            const helper = new DirectionalLightHelper(light, 2, 0xff0000);
+            light.parent?.add(helper);
+          }
+        }}
         castShadow
         intensity={1}
         shadow-bias={-0.0001}
-        position={[5, 10, 7.5]}
+        position={[5, 20, 7.5]}
       />
     </>
   );

@@ -8,6 +8,8 @@ import { ThreeElements } from "@react-three/fiber";
 import { MeshStandardMaterial } from "three";
 import { Book } from "./Book";
 import { Envelope } from "./Envelope";
+import { Briefcase } from "./Briefcase";
+import { Statue } from "./Statue";
 
 export function Scene(props: ThreeElements["group"]) {
   const { nodes, materials } = useGLTF("/Scene1.glb") as any;
@@ -38,15 +40,7 @@ export function Scene(props: ThreeElements["group"]) {
         rotation={[Math.PI, 0, Math.PI]}
         scale={0.769}
       />
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.model.geometry}
-        material={materials.model}
-        position={[2.328, 0.813, -1.303]}
-        rotation={[-0.705, 0, 0]}
-        scale={0.293}
-      />
+      <Briefcase />
       <mesh
         castShadow
         receiveShadow
@@ -55,15 +49,7 @@ export function Scene(props: ThreeElements["group"]) {
         position={[-0.11, 0, 0.064]}
         scale={[2.058, 1, 2.038]}
       />
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.statue.geometry}
-        material={materials["normal "]}
-        position={[1.249, 1.224, -1.134]}
-        rotation={[Math.PI / 2, 0, Math.PI]}
-        scale={0.006}
-      />
+      <Statue />
       <mesh
         castShadow
         receiveShadow

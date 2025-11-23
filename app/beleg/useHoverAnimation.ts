@@ -10,13 +10,11 @@ export function useHoverAnimation(
   const [hovered, setHovered] = useState(false);
 
   const handlePointerOver = useCallback((e: ThreeEvent<PointerEvent>) => {
-    e.stopPropagation();
     setHovered(true);
     if (typeof document !== "undefined") document.body.style.cursor = "pointer";
   }, []);
 
   const handlePointerOut = useCallback((e: ThreeEvent<PointerEvent>) => {
-    e.stopPropagation();
     setHovered(false);
     if (typeof document !== "undefined") document.body.style.cursor = "";
   }, []);

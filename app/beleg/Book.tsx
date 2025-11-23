@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { useGLTF } from "@react-three/drei";
+import { Text3D, useGLTF } from "@react-three/drei";
 import { ThreeElements } from "@react-three/fiber";
 import { animated } from "@react-spring/three";
 import { Select } from "@react-three/postprocessing";
@@ -14,19 +14,29 @@ export function Book(props: ThreeElements["group"]) {
   const { hovered, position, handlePointerOver, handlePointerOut } =
     useHoverAnimation(
       originalPosition, // Original position
-      0.2 // Hover offset (move up by 0.2 units on Y axis)
+      0.05 // Hover offset (move up by 0.2 units on Y axis)
     );
+  const initialScale = 0.458;
 
   return (
-    <Select enabled={hovered}>
-      <animated.group
-        position={position as any}
-        rotation={[0, 0.167, 0]}
-        scale={0.458}
-        {...props}
-        onPointerOver={handlePointerOver}
-        onPointerOut={handlePointerOut}
-      >
+    <animated.group
+      position={position as any}
+      rotation={[0, 0.167, 0]}
+      scale={initialScale}
+      {...props}
+      onPointerEnter={handlePointerOver}
+      onPointerLeave={handlePointerOut}
+    >
+      <Select enabled={hovered}>
+        {hovered && (
+          <Text3D
+            scale={0.05 / initialScale}
+            position={[-0.4, 0.2, 0]}
+            font="/geist-mono-regular-font.json"
+          >
+            Education
+          </Text3D>
+        )}
         <mesh
           castShadow
           receiveShadow
@@ -57,8 +67,8 @@ export function Book(props: ThreeElements["group"]) {
           geometry={nodes.Plane046_4.geometry}
           material={materials["Pencil 2"]}
         />
-      </animated.group>
-    </Select>
+      </Select>
+    </animated.group>
   );
 }
 
