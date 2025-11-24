@@ -1,7 +1,6 @@
 import React from "react";
 import { Outlines, Text3D, useGLTF } from "@react-three/drei";
-import { ThreeElements, useFrame } from "@react-three/fiber";
-import { Select } from "@react-three/postprocessing";
+import { ThreeElements } from "@react-three/fiber";
 import { animated } from "@react-spring/three";
 import { useHoverAnimation } from "./useHoverAnimation";
 import * as THREE from "three";

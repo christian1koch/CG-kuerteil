@@ -1,40 +1,15 @@
 "use client";
-import { Canvas, useFrame } from "@react-three/fiber";
+import { Canvas } from "@react-three/fiber";
 import { Scene } from "./Scene";
-import { Orbit } from "next/font/google";
-import {
-  BakeShadows,
-  CameraControls,
-  ContactShadows,
-  Environment,
-  Html,
-  OrbitControls,
-  PerspectiveCamera,
-  RandomizedLight,
-  Shadow,
-  SoftShadows,
-  Stage,
-  Stars,
-  useProgress,
-} from "@react-three/drei";
+import { CameraControls, Html, useProgress } from "@react-three/drei";
 import { DirectionalLightHelper } from "three";
-import { useThree } from "@react-three/fiber";
-import {
-  Bloom,
-  DepthOfField,
-  EffectComposer,
-  Noise,
-  Outline,
-  Selection,
-  Vignette,
-} from "@react-three/postprocessing";
 import { Suspense, useEffect, useRef } from "react";
 import * as THREE from "three";
 
 const DEBUG_MODE = false;
 
 function Loader() {
-  const { active, progress, errors, item, loaded, total } = useProgress();
+  const { progress } = useProgress();
   return <Html center>{progress} % loaded</Html>;
 }
 
@@ -49,7 +24,6 @@ export default function Beleg() {
     </div>
   );
 }
-const initialPosition: [number, number, number] = [0, 5, 10];
 function SceneContainer() {
   const controlsRef = useRef<CameraControls>(null!);
   const meshRef = useRef<THREE.Mesh>(null!);
@@ -135,22 +109,4 @@ function SceneContainer() {
       />
     </>
   );
-}
-
-function useGetCameraPosAndRot() {
-  const { camera } = useThree();
-
-  const handleOrbitChange = () => {
-    console.log("Camera Position:", {
-      x: camera.position.x.toFixed(3),
-      y: camera.position.y.toFixed(3),
-      z: camera.position.z.toFixed(3),
-    });
-    console.log("Camera Rotation:", {
-      x: camera.rotation.x.toFixed(3),
-      y: camera.rotation.y.toFixed(3),
-      z: camera.rotation.z.toFixed(3),
-    });
-    return handleOrbitChange;
-  };
 }

@@ -3,7 +3,6 @@ import React from "react";
 import { Outlines, Text3D, useGLTF } from "@react-three/drei";
 import { ThreeElements } from "@react-three/fiber";
 import { animated } from "@react-spring/three";
-import { Select } from "@react-three/postprocessing";
 import { useHoverAnimation } from "./useHoverAnimation";
 
 export function Book(props: ThreeElements["group"]) {
