@@ -26,15 +26,14 @@ export function Book(props: ThreeElements["group"]) {
       onPointerEnter={handlePointerOver}
       onPointerLeave={handlePointerOut}
     >
-      {hovered && (
-        <Text3D
-          scale={0.05 / initialScale}
-          position={[-0.4, 0.2, 0]}
-          font="/geist-mono-regular-font.json"
-        >
-          Education
-        </Text3D>
-      )}
+      <Text3D
+        visible={hovered}
+        scale={0.05 / initialScale}
+        position={[-0.4, 0.2, 0]}
+        font="/geist-mono-regular-font.json"
+      >
+        Education
+      </Text3D>
       <mesh
         castShadow
         receiveShadow
@@ -72,5 +71,3 @@ export function Book(props: ThreeElements["group"]) {
     </animated.group>
   );
 }
-
-useGLTF.preload("/Scene1.glb");

@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import { Outlines, Text3D, useGLTF } from "@react-three/drei";
 import { ThreeElements } from "@react-three/fiber";
@@ -23,15 +24,14 @@ export function Envelope(props: ThreeElements["group"]) {
 
   return (
     <animated.group position={position as any}>
-      {hovered && (
-        <Text3D
-          scale={0.05}
-          position={[-0.2, 0.2, 0]}
-          font="/geist-mono-regular-font.json"
-        >
-          Contact me
-        </Text3D>
-      )}
+      <Text3D
+        visible={hovered}
+        scale={0.05}
+        position={[-0.2, 0.2, 0]}
+        font="/geist-mono-regular-font.json"
+      >
+        Contact me
+      </Text3D>
       <mesh
         castShadow
         receiveShadow
@@ -47,5 +47,3 @@ export function Envelope(props: ThreeElements["group"]) {
     </animated.group>
   );
 }
-
-useGLTF.preload("/Scene1.glb");

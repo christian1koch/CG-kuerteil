@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import { Outlines, Text3D, useGLTF } from "@react-three/drei";
 import { ThreeElements } from "@react-three/fiber";
@@ -18,15 +19,14 @@ export function Statue(props: ThreeElements["group"]) {
 
   return (
     <animated.group position={position as any}>
-      {hovered && (
-        <Text3D
-          scale={0.05}
-          position={[-0.15, 0.2, 0]}
-          font="/geist-mono-regular-font.json"
-        >
-          About Me
-        </Text3D>
-      )}
+      <Text3D
+        visible={hovered}
+        scale={0.05}
+        position={[-0.15, 0.2, 0]}
+        font="/geist-mono-regular-font.json"
+      >
+        About Me
+      </Text3D>
 
       <mesh
         rotation={[Math.PI / 2, 0, Math.PI]}
@@ -44,5 +44,3 @@ export function Statue(props: ThreeElements["group"]) {
     </animated.group>
   );
 }
-
-useGLTF.preload("/Scene1.glb");

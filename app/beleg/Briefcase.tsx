@@ -1,12 +1,21 @@
+"use client";
 import React from "react";
-import { Outlines, Text3D, useGLTF } from "@react-three/drei";
+import { Outlines, Text3D } from "@react-three/drei";
 import { ThreeElements } from "@react-three/fiber";
 import { animated } from "@react-spring/three";
 import { useHoverAnimation } from "./useHoverAnimation";
 
-export function Briefcase(props: ThreeElements["group"]) {
-  const { nodes, materials } = useGLTF("/Scene1.glb") as any;
+// Accept nodes and materials as props instead of loading them again
+interface BriefcaseProps {
+  nodes: any;
+  materials: any;
+}
 
+export function Briefcase({
+  nodes,
+  materials,
+  ...props
+}: BriefcaseProps & ThreeElements["group"]) {
   const originalPosition: [number, number, number] = [2.328, 0.813, -1.303];
   const initialScale = 0.293;
 
@@ -18,23 +27,23 @@ export function Briefcase(props: ThreeElements["group"]) {
 
   return (
     <animated.group
+      dispose={null}
       position={position as any}
       rotation={[-0.705, 0, 0]}
       scale={initialScale}
       {...props}
-      onPointerEnter={handlePointerOver}
-      onPointerLeave={handlePointerOut}
+      onPointerOver={handlePointerOver}
+      onPointerOut={handlePointerOut}
     >
-      {hovered && (
-        <Text3D
-          scale={0.05 / initialScale}
-          rotation={[0.705, 0, 0]}
-          position={[-1, 1.1, 1.1]}
-          font="/geist-mono-regular-font.json"
-        >
-          Job Experience
-        </Text3D>
-      )}
+      <Text3D
+        visible={hovered}
+        scale={0.05 / initialScale}
+        rotation={[0.705, 0, 0]}
+        position={[-1, 1.1, 1.1]}
+        font="/geist-mono-regular-font.json"
+      >
+        Job Experience
+      </Text3D>
 
       <mesh
         castShadow
@@ -47,5 +56,3 @@ export function Briefcase(props: ThreeElements["group"]) {
     </animated.group>
   );
 }
-
-useGLTF.preload("/Scene1.glb");
