@@ -1,5 +1,5 @@
 import React from "react";
-import { Text3D, useGLTF } from "@react-three/drei";
+import { Outlines, Text3D, useGLTF } from "@react-three/drei";
 import { ThreeElements } from "@react-three/fiber";
 import { animated } from "@react-spring/three";
 import { Select } from "@react-three/postprocessing";
@@ -36,14 +36,15 @@ export function Briefcase(props: ThreeElements["group"]) {
           Job Experience
         </Text3D>
       )}
-      <Select enabled={hovered}>
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.model.geometry}
-          material={materials.model}
-        />
-      </Select>
+
+      <mesh
+        castShadow
+        receiveShadow
+        geometry={nodes.model.geometry}
+        material={materials.model}
+      >
+        {hovered && <Outlines thickness={0.05} color="pink" screenspace />}
+      </mesh>
     </animated.group>
   );
 }

@@ -1,5 +1,5 @@
 import React from "react";
-import { Text3D, useGLTF } from "@react-three/drei";
+import { Outlines, Text3D, useGLTF } from "@react-three/drei";
 import { ThreeElements, useFrame } from "@react-three/fiber";
 import { Select } from "@react-three/postprocessing";
 import { animated } from "@react-spring/three";
@@ -33,19 +33,18 @@ export function Envelope(props: ThreeElements["group"]) {
           Contact me
         </Text3D>
       )}
-      <Select enabled={hovered}>
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Envelope.geometry}
-          scale={[0.213, 0.15, 0.113]}
-          onPointerOver={handlePointerOver}
-          onPointerOut={handlePointerOut}
-          {...props}
-        >
-          <meshToonMaterial side={2} />
-        </mesh>
-      </Select>
+      <mesh
+        castShadow
+        receiveShadow
+        geometry={nodes.Envelope.geometry}
+        scale={[0.213, 0.15, 0.113]}
+        onPointerOver={handlePointerOver}
+        onPointerOut={handlePointerOut}
+        {...props}
+      >
+        <meshToonMaterial side={2} />
+        {hovered && <Outlines thickness={0.1} color="pink" screenspace />}
+      </mesh>
     </animated.group>
   );
 }

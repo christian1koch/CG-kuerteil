@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { Text3D, useGLTF } from "@react-three/drei";
+import { Outlines, Text3D, useGLTF } from "@react-three/drei";
 import { ThreeElements } from "@react-three/fiber";
 import { animated } from "@react-spring/three";
 import { Select } from "@react-three/postprocessing";
@@ -27,47 +27,49 @@ export function Book(props: ThreeElements["group"]) {
       onPointerEnter={handlePointerOver}
       onPointerLeave={handlePointerOut}
     >
-      <Select enabled={hovered}>
-        {hovered && (
-          <Text3D
-            scale={0.05 / initialScale}
-            position={[-0.4, 0.2, 0]}
-            font="/geist-mono-regular-font.json"
-          >
-            Education
-          </Text3D>
-        )}
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Plane046.geometry}
-          material={materials["Book Cover"]}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Plane046_1.geometry}
-          material={materials["Book Page 33"]}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Plane046_2.geometry}
-          material={materials.Pencil}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Plane046_3.geometry}
-          material={materials.Eraser}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Plane046_4.geometry}
-          material={materials["Pencil 2"]}
-        />
-      </Select>
+      {hovered && (
+        <Text3D
+          scale={0.05 / initialScale}
+          position={[-0.4, 0.2, 0]}
+          font="/geist-mono-regular-font.json"
+        >
+          Education
+        </Text3D>
+      )}
+      <mesh
+        castShadow
+        receiveShadow
+        geometry={nodes.Plane046.geometry}
+        material={materials["Book Cover"]}
+      >
+        {hovered && <Outlines thickness={0.05} color="pink" screenspace />}
+      </mesh>
+      <mesh
+        castShadow
+        receiveShadow
+        geometry={nodes.Plane046_1.geometry}
+        material={materials["Book Page 33"]}
+      >
+        {hovered && <Outlines thickness={0.05} color="pink" screenspace />}
+      </mesh>
+      <mesh
+        castShadow
+        receiveShadow
+        geometry={nodes.Plane046_2.geometry}
+        material={materials.Pencil}
+      />
+      <mesh
+        castShadow
+        receiveShadow
+        geometry={nodes.Plane046_3.geometry}
+        material={materials.Eraser}
+      />
+      <mesh
+        castShadow
+        receiveShadow
+        geometry={nodes.Plane046_4.geometry}
+        material={materials["Pencil 2"]}
+      />
     </animated.group>
   );
 }

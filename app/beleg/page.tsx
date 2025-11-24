@@ -106,22 +106,19 @@ function SceneContainer() {
         minPolarAngle={0}
         maxPolarAngle={Math.PI / 2}
       />
-      <Selection>
-        <EffectComposer autoClear={false}>
-          <Outline blur edgeStrength={100} />
-        </EffectComposer>
-        {/* <OrbitControls /> */}
-        <Scene castShadow receiveShadow />
-        <mesh
-          ref={meshRef}
-          position={[1.8, 1.3, -0.5]}
-          rotation={[-Math.PI / 6, Math.PI, 0]}
-          visible={DEBUG_MODE}
-        >
-          <planeGeometry args={[1, 1]} />
-          <meshBasicMaterial wireframe visible={DEBUG_MODE} />
-        </mesh>
-      </Selection>
+
+      {/* <OrbitControls /> */}
+      <Scene castShadow receiveShadow />
+      <mesh
+        ref={meshRef}
+        position={[1.8, 1.3, -0.5]}
+        rotation={[-Math.PI / 6, Math.PI, 0]}
+        visible={DEBUG_MODE}
+      >
+        <planeGeometry args={[1, 1]} />
+        <meshBasicMaterial wireframe visible={DEBUG_MODE} />
+      </mesh>
+
       {/* <PerspectiveCamera makeDefault position={[0, 5, 10]} /> */}
       <ambientLight intensity={1} />
       <directionalLight

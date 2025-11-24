@@ -1,5 +1,5 @@
 import React from "react";
-import { Text3D, useGLTF } from "@react-three/drei";
+import { Outlines, Text3D, useGLTF } from "@react-three/drei";
 import { ThreeElements } from "@react-three/fiber";
 import { animated } from "@react-spring/three";
 import { Select } from "@react-three/postprocessing";
@@ -28,19 +28,20 @@ export function Statue(props: ThreeElements["group"]) {
           About Me
         </Text3D>
       )}
-      <Select enabled={hovered}>
-        <mesh
-          rotation={[Math.PI / 2, 0, Math.PI]}
-          scale={initialScale}
-          {...props}
-          onPointerEnter={handlePointerOver}
-          onPointerLeave={handlePointerOut}
-          castShadow
-          receiveShadow
-          geometry={nodes.statue.geometry}
-          material={materials["normal "]}
-        />
-      </Select>
+
+      <mesh
+        rotation={[Math.PI / 2, 0, Math.PI]}
+        scale={initialScale}
+        {...props}
+        onPointerEnter={handlePointerOver}
+        onPointerLeave={handlePointerOut}
+        castShadow
+        receiveShadow
+        geometry={nodes.statue.geometry}
+        material={materials["normal "]}
+      >
+        {hovered && <Outlines thickness={2} color="pink" screenspace />}
+      </mesh>
     </animated.group>
   );
 }
