@@ -9,6 +9,7 @@ import { Book } from "./Book";
 import { Envelope } from "./Envelope";
 import { Briefcase } from "./Briefcase";
 import { Statue } from "./Statue";
+import { Lamp } from "./Lamp";
 
 export function Scene(props: ThreeElements["group"]) {
   const { nodes, materials } = useGLTF("/Scene1.glb") as any;
@@ -30,6 +31,7 @@ export function Scene(props: ThreeElements["group"]) {
         material={materials["furniture_texture.008"]}
         position={[-1.787, 0.097, -0.062]}
       />
+      <Lamp />
       <Book />
       <mesh
         castShadow

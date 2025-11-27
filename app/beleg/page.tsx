@@ -2,11 +2,10 @@
 import { Canvas } from "@react-three/fiber";
 import { Scene } from "./Scene";
 import { CameraControls, Html, useProgress } from "@react-three/drei";
-import { DirectionalLightHelper } from "three";
 import { Suspense, useEffect, useRef } from "react";
 import * as THREE from "three";
 
-const DEBUG_MODE = false;
+const DEBUG_MODE = true;
 
 function Loader() {
   const { progress } = useProgress();
@@ -16,7 +15,7 @@ function Loader() {
 export default function Beleg() {
   return (
     <div className="h-screen bg-blue-300">
-      <Canvas shadows="soft" camera={{ position: [0, 5, 10] }}>
+      <Canvas shadows camera={{ position: [0, 5, 10] }}>
         <Suspense fallback={<Loader />}>
           <SceneContainer />
         </Suspense>
@@ -82,6 +81,7 @@ function SceneContainer() {
       />
 
       {/* <OrbitControls /> */}
+
       <Scene castShadow receiveShadow />
       <mesh
         ref={meshRef}
@@ -98,14 +98,29 @@ function SceneContainer() {
       <directionalLight
         ref={(light) => {
           if (light && DEBUG_MODE) {
-            const helper = new DirectionalLightHelper(light, 2, 0xff0000);
+            const helper = new THREE.DirectionalLightHelper(light, 2, 0xff0000);
             light.parent?.add(helper);
           }
         }}
         castShadow
-        intensity={1}
+        intensity={0.5}
         shadow-bias={-0.0001}
         position={[5, 20, 7.5]}
+        shadow-mapSize-width={2048}
+      />
+      <pointLight
+        ref={(light) => {
+          if (light) {
+            const helper = new THREE.PointLightHelper(light, 1);
+            light.parent?.add(helper);
+          }
+        }}
+        position={[2, 2, -1]}
+        scale={0.5}
+        intensity={1}
+        castShadow
+        shadow-bias={-0.001}
+        distance={4}
       />
     </>
   );
