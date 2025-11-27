@@ -32,7 +32,6 @@ export function Scene(props: ThreeElements["group"]) {
         position={[-1.787, 0.097, -0.062]}
       />
       <Lamp />
-      <Book />
       <mesh
         castShadow
         receiveShadow
@@ -42,7 +41,6 @@ export function Scene(props: ThreeElements["group"]) {
         rotation={[Math.PI, 0, Math.PI]}
         scale={0.769}
       />
-      <Briefcase nodes={nodes} materials={materials} />
       <mesh
         castShadow
         receiveShadow
@@ -51,7 +49,6 @@ export function Scene(props: ThreeElements["group"]) {
         position={[-0.11, 0, 0.064]}
         scale={[2.058, 1, 2.038]}
       />
-      <Statue />
       <mesh
         castShadow
         receiveShadow
@@ -74,7 +71,6 @@ export function Scene(props: ThreeElements["group"]) {
           material={materials["tiny_treats_1.065"]}
         />
       </group>
-      <Envelope />
       <mesh
         castShadow
         receiveShadow

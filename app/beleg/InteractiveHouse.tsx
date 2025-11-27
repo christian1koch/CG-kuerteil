@@ -1,0 +1,161 @@
+import { Ref, useEffect, useRef, useState } from "react";
+import { Book } from "./Book";
+import { Briefcase } from "./Briefcase";
+import { Envelope } from "./Envelope";
+import { Statue } from "./Statue";
+import * as THREE from "three";
+import { DEBUG_MODE } from "./constants";
+import { CameraControls } from "@react-three/drei";
+
+const Positions = {
+  ROOM: new THREE.Vector3(1.8, 1.3, -0.5),
+  OFFICE: new THREE.Vector3(1.6, 1.3, -2.5),
+};
+
+const Rotation = {
+  ROOM: new THREE.Euler(-Math.PI / 6, Math.PI, 0),
+  OFFICE: new THREE.Euler(Math.PI / 12, 0, 0),
+};
+
+/**
+ * Contains:
+ * The objects that can be clicked ✅
+ * The states to change the current room
+ * the camera and the targets
+ */
+export function InteractiveHouse() {
+  const [selectedRoom, setSelectedRoom] = useState<Spaces>(Spaces.Bedroom);
+
+  const controlsRef = useRef<CameraControls>(null!);
+  const meshRef = useRef<THREE.Mesh>(null!);
+
+  const handleFocusOnObject = () => {
+    if (!controlsRef.current) return;
+    if (!meshRef.current) return;
+    const { x, y, z } = meshRef.current.position;
+    if (!meshRef.current.geometry.boundingBox) {
+      meshRef.current.geometry.computeBoundingBox();
+    }
+    const bb = meshRef.current.geometry.boundingBox;
+    const rectWidth = bb!.max.x - bb!.min.x;
+    const rectHeight = bb!.max.y - bb!.min.y;
+    const rectNormal = new THREE.Vector3()
+      .set(0, 0, 1)
+      .applyQuaternion(meshRef.current.quaternion);
+    const rectCenterPosition = new THREE.Vector3().copy(
+      meshRef.current.position
+    );
+    // controlsRef.current.setLookAt(x, y, z, x, y, z);
+    const distance = controlsRef.current.getDistanceToFitBox(
+      rectWidth,
+      rectHeight,
+      0
+    );
+    const cameraPosition = new THREE.Vector3(x, y, z)
+      .copy(rectNormal)
+      .multiplyScalar(-distance)
+      .add(rectCenterPosition);
+
+    controlsRef.current
+      .normalizeRotations()
+      .setLookAt(
+        cameraPosition.x,
+        cameraPosition.y,
+        cameraPosition.z,
+        rectCenterPosition.x,
+        rectCenterPosition.y,
+        rectCenterPosition.z,
+        true
+      );
+  };
+
+  useEffect(() => {
+    handleFocusOnObject();
+  }, [selectedRoom]);
+
+  return (
+    <>
+      <CameraControls
+        ref={controlsRef}
+        makeDefault
+        minPolarAngle={0}
+        maxPolarAngle={Math.PI / 2}
+      />
+      <MeshCameraTargetControl space={selectedRoom} ref={meshRef} />
+      <Briefcase onClick={() => setSelectedRoom(Spaces.Office)} />
+      <Book onClick={() => setSelectedRoom(Spaces.School)} />
+      <Envelope onClick={() => setSelectedRoom(Spaces.Garden)} />
+      <Statue onClick={() => setSelectedRoom(Spaces.Bedroom)} />
+    </>
+  );
+}
+
+interface MeshCameraTarget {
+  ref: Ref<THREE.Mesh>;
+  position: THREE.Vector3;
+  rotation: THREE.Euler;
+}
+
+enum Spaces {
+  Bedroom,
+  Office,
+  School,
+  Garden,
+}
+
+interface MeshCameraTargetControl {
+  ref: Ref<THREE.Mesh>;
+  space: Spaces;
+}
+
+export function MeshCameraTargetControl({
+  ref,
+  space,
+}: MeshCameraTargetControl) {
+  switch (space) {
+    case Spaces.Bedroom:
+      return <BedRoomCameraTarget ref={ref} />;
+    case Spaces.Office:
+      return <OfficeCameraTargets ref={ref} />;
+    default:
+      return null;
+  }
+}
+
+export function OfficeCameraTargets({ ref }: { ref: Ref<THREE.Mesh> }) {
+  return (
+    <MeshCameraTarget
+      rotation={Rotation.OFFICE}
+      position={Positions.OFFICE}
+      ref={ref}
+    />
+  );
+}
+
+export function BedRoomCameraTarget({ ref }: { ref: Ref<THREE.Mesh> }) {
+  return (
+    <MeshCameraTarget
+      rotation={Rotation.ROOM}
+      position={Positions.ROOM}
+      ref={ref}
+    />
+  );
+}
+
+export function MeshCameraTarget({
+  ref,
+  position,
+  rotation,
+}: MeshCameraTarget) {
+  return (
+    <mesh
+      ref={ref}
+      position={position}
+      rotation={rotation}
+      visible={DEBUG_MODE}
+    >
+      <planeGeometry args={[1, 1]} />
+      <meshBasicMaterial wireframe visible={DEBUG_MODE} />
+    </mesh>
+  );
+}

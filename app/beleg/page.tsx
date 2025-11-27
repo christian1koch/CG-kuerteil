@@ -2,8 +2,9 @@
 import { Canvas } from "@react-three/fiber";
 import { Scene } from "./Scene";
 import { CameraControls, Html, useProgress } from "@react-three/drei";
-import { Suspense, useEffect, useRef } from "react";
+import { Ref, Suspense, useEffect, useRef } from "react";
 import * as THREE from "three";
+import { InteractiveHouse } from "./InteractiveHouse";
 
 const DEBUG_MODE = true;
 
@@ -24,76 +25,11 @@ export default function Beleg() {
   );
 }
 function SceneContainer() {
-  const controlsRef = useRef<CameraControls>(null!);
-  const meshRef = useRef<THREE.Mesh>(null!);
-
-  const handleFocusOnObject = () => {
-    if (!controlsRef.current) return;
-    if (!meshRef.current) return;
-    const { x, y, z } = meshRef.current.position;
-    if (!meshRef.current.geometry.boundingBox) {
-      meshRef.current.geometry.computeBoundingBox();
-    }
-    const bb = meshRef.current.geometry.boundingBox;
-    const rectWidth = bb!.max.x - bb!.min.x;
-    const rectHeight = bb!.max.y - bb!.min.y;
-    const rectNormal = new THREE.Vector3()
-      .set(0, 0, 1)
-      .applyQuaternion(meshRef.current.quaternion);
-    const rectCenterPosition = new THREE.Vector3().copy(
-      meshRef.current.position
-    );
-    // controlsRef.current.setLookAt(x, y, z, x, y, z);
-    const distance = controlsRef.current.getDistanceToFitBox(
-      rectWidth,
-      rectHeight,
-      0
-    );
-    const cameraPosition = new THREE.Vector3(x, y, z)
-      .copy(rectNormal)
-      .multiplyScalar(-distance)
-      .add(rectCenterPosition);
-
-    controlsRef.current
-      .normalizeRotations()
-      .setLookAt(
-        cameraPosition.x,
-        cameraPosition.y,
-        cameraPosition.z,
-        rectCenterPosition.x,
-        rectCenterPosition.y,
-        rectCenterPosition.z,
-        true
-      );
-  };
-
-  useEffect(() => {
-    handleFocusOnObject();
-  }, []);
-
   return (
     <>
-      <CameraControls
-        ref={controlsRef}
-        makeDefault
-        minPolarAngle={0}
-        maxPolarAngle={Math.PI / 2}
-      />
-
-      {/* <OrbitControls /> */}
-
+      <InteractiveHouse />
       <Scene castShadow receiveShadow />
-      <mesh
-        ref={meshRef}
-        position={[1.8, 1.3, -0.5]}
-        rotation={[-Math.PI / 6, Math.PI, 0]}
-        visible={DEBUG_MODE}
-      >
-        <planeGeometry args={[1, 1]} />
-        <meshBasicMaterial wireframe visible={DEBUG_MODE} />
-      </mesh>
 
-      {/* <PerspectiveCamera makeDefault position={[0, 5, 10]} /> */}
       <ambientLight intensity={1} />
       <directionalLight
         ref={(light) => {

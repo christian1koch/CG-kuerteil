@@ -1,21 +1,12 @@
 "use client";
 import React from "react";
-import { Outlines, Text3D } from "@react-three/drei";
+import { Outlines, Text3D, useGLTF } from "@react-three/drei";
 import { ThreeElements } from "@react-three/fiber";
 import { animated } from "@react-spring/three";
 import { useHoverAnimation } from "./useHoverAnimation";
 
-// Accept nodes and materials as props instead of loading them again
-interface BriefcaseProps {
-  nodes: any;
-  materials: any;
-}
-
-export function Briefcase({
-  nodes,
-  materials,
-  ...props
-}: BriefcaseProps & ThreeElements["group"]) {
+export function Briefcase({ ...props }: ThreeElements["group"]) {
+  const { nodes, materials } = useGLTF("/Scene1.glb") as any;
   const originalPosition: [number, number, number] = [2.328, 0.813, -1.303];
   const initialScale = 0.293;
 
