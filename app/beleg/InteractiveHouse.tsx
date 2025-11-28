@@ -9,12 +9,16 @@ import { CameraControls } from "@react-three/drei";
 
 const Positions = {
   ROOM: new THREE.Vector3(1.8, 1.3, -0.5),
-  OFFICE: new THREE.Vector3(1.6, 1.3, -2.5),
+  OFFICE: new THREE.Vector3(1.62, 1.5, -2.5),
+  SCHOOL: new THREE.Vector3(-6.1, 2.2, -3),
+  GARDEN: new THREE.Vector3(-6.62, 2.2, 1.5),
 };
 
 const Rotation = {
   ROOM: new THREE.Euler(-Math.PI / 6, Math.PI, 0),
-  OFFICE: new THREE.Euler(Math.PI / 12, 0, 0),
+  OFFICE: new THREE.Euler(Math.PI / 24, 0, 0),
+  SCHOOL: new THREE.Euler(Math.PI / 24, 0, 0),
+  GARDEN: new THREE.Euler(Math.PI, 0, 0),
 };
 
 /**
@@ -29,7 +33,7 @@ export function InteractiveHouse() {
   const controlsRef = useRef<CameraControls>(null!);
   const meshRef = useRef<THREE.Mesh>(null!);
 
-  const handleFocusOnObject = () => {
+  const handleFocusOnObject = async () => {
     if (!controlsRef.current) return;
     if (!meshRef.current) return;
     const { x, y, z } = meshRef.current.position;
@@ -56,17 +60,38 @@ export function InteractiveHouse() {
       .multiplyScalar(-distance)
       .add(rectCenterPosition);
 
-    controlsRef.current
+    // Calculate a position further away for the "zoomed out" state
+    const farCameraPosition = new THREE.Vector3(x, y, z)
+      .copy(rectNormal)
+      .multiplyScalar(-(distance + 5))
+      .add(rectCenterPosition);
+
+    // 1. Zoom out from current position
+    await controlsRef.current.dolly(-5, true);
+
+    // 2. Rotate/Move to the new angle while staying far away
+    await controlsRef.current
       .normalizeRotations()
       .setLookAt(
-        cameraPosition.x,
-        cameraPosition.y,
-        cameraPosition.z,
+        farCameraPosition.x,
+        farCameraPosition.y,
+        farCameraPosition.z,
         rectCenterPosition.x,
         rectCenterPosition.y,
         rectCenterPosition.z,
         true
       );
+
+    // 3. Zoom in to the final position
+    await controlsRef.current.setLookAt(
+      cameraPosition.x,
+      cameraPosition.y,
+      cameraPosition.z,
+      rectCenterPosition.x,
+      rectCenterPosition.y,
+      rectCenterPosition.z,
+      true
+    );
   };
 
   useEffect(() => {
@@ -90,12 +115,6 @@ export function InteractiveHouse() {
   );
 }
 
-interface MeshCameraTarget {
-  ref: Ref<THREE.Mesh>;
-  position: THREE.Vector3;
-  rotation: THREE.Euler;
-}
-
 enum Spaces {
   Bedroom,
   Office,
@@ -117,6 +136,10 @@ export function MeshCameraTargetControl({
       return <BedRoomCameraTarget ref={ref} />;
     case Spaces.Office:
       return <OfficeCameraTargets ref={ref} />;
+    case Spaces.School:
+      return <SchoolCameraTargets ref={ref} />;
+    case Spaces.Garden:
+      return <GardenCameraTargets ref={ref} />;
     default:
       return null;
   }
@@ -142,10 +165,18 @@ export function BedRoomCameraTarget({ ref }: { ref: Ref<THREE.Mesh> }) {
   );
 }
 
+interface MeshCameraTarget {
+  ref: Ref<THREE.Mesh>;
+  position: THREE.Vector3;
+  rotation: THREE.Euler;
+  color?: THREE.Color;
+}
+
 export function MeshCameraTarget({
   ref,
   position,
   rotation,
+  color = new THREE.Color(0xff0000),
 }: MeshCameraTarget) {
   return (
     <mesh
@@ -155,7 +186,27 @@ export function MeshCameraTarget({
       visible={DEBUG_MODE}
     >
       <planeGeometry args={[1, 1]} />
-      <meshBasicMaterial wireframe visible={DEBUG_MODE} />
+      <meshBasicMaterial wireframe visible={DEBUG_MODE} color={color} />
     </mesh>
+  );
+}
+
+export function SchoolCameraTargets({ ref }: { ref: Ref<THREE.Mesh> }) {
+  return (
+    <MeshCameraTarget
+      rotation={Rotation.SCHOOL}
+      position={Positions.SCHOOL}
+      ref={ref}
+    />
+  );
+}
+
+export function GardenCameraTargets({ ref }: { ref: Ref<THREE.Mesh> }) {
+  return (
+    <MeshCameraTarget
+      rotation={Rotation.GARDEN}
+      position={Positions.GARDEN}
+      ref={ref}
+    />
   );
 }
