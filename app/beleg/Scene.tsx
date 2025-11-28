@@ -13,7 +13,6 @@ import { Lamp } from "./Lamp";
 
 export function Scene(props: ThreeElements["group"]) {
   const { nodes, materials } = useGLTF("/Scene1.glb") as any;
-  console.log("rerender");
   return (
     <group {...props}>
       <mesh
@@ -257,12 +256,9 @@ export function Scene(props: ThreeElements["group"]) {
           geometry={nodes.Cube074.geometry}
           material={materials.Palette}
         />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Cube074_1.geometry}
-          material={materials.Screens}
-        />
+        <mesh castShadow receiveShadow geometry={nodes.Cube074_1.geometry}>
+          <meshBasicMaterial color="black" />
+        </mesh>
       </group>
       <mesh
         castShadow
