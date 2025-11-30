@@ -30,9 +30,15 @@ export interface WorkExperienceField {
 export function WorkExperienceText({
     fields,
     onHoverChange,
+    scale = 1,
+    position = [0, 0, 0],
+    rotation = [0, 0, 0],
 }: {
     fields: WorkExperienceField[];
     onHoverChange?: (isHovering: boolean) => void;
+    scale?: number;
+    position?: [number, number, number];
+    rotation?: [number, number, number];
 }) {
     const stencil = useMask(1, false);
     const groupRef = useRef<THREE.Group>(null);
@@ -66,25 +72,25 @@ export function WorkExperienceText({
                 const lines = wrappedDetail.split("\n").length;
                 const height = lines * FONT_SIZE * LINE_HEIGHT;
                 const y = localCursor;
-                localCursor -= height + 0.1;
+                localCursor -= height + 0.3;
                 return { detail: wrappedDetail, y };
             });
 
             const fieldHeight = -localCursor;
             const groupY = currentY;
-            currentY -= fieldHeight + 0.5;
+            currentY -= fieldHeight;
 
             return { field, groupY, details };
         });
         return { layoutItems: items, totalHeight: -currentY };
-    }, [fields]);
+    }, [fields, FONT_SIZE]);
 
     const handleWheel = (e: ThreeEvent<WheelEvent>) => {
         e.stopPropagation();
         const sensitivity = 0.005;
         targetScrollY.current += e.deltaY * sensitivity;
 
-        const maxScroll = Math.max(0, totalHeight - 3);
+        const maxScroll = Math.max(0, totalHeight - 5);
         targetScrollY.current = THREE.MathUtils.clamp(
             targetScrollY.current,
             0,
@@ -104,9 +110,9 @@ export function WorkExperienceText({
     });
 
     return (
-        <group>
+        <group position={position} rotation={rotation} scale={scale}>
             <Mask id={1} position={[MAX_WIDTH / 2, -2.5, 0]}>
-                <planeGeometry args={[MAX_WIDTH + 10, 5]} />
+                <planeGeometry args={[MAX_WIDTH + 10, 6]} />
             </Mask>
             <mesh
                 onPointerEnter={handlePointerEnter}
@@ -150,7 +156,7 @@ export function WorkExperienceText({
                                 font="/courier-prime.json"
                                 size={FONT_SIZE}
                                 height={0.02}
-                                lineHeight={0.6}
+                                lineHeight={1}
                                 position={[0.2, detailItem.y - FONT_SIZE, 0]}
                             >
                                 • {detailItem.detail}
