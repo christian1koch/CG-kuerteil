@@ -17,7 +17,12 @@ export default function Playground() {
     const [disableZoom, setDisableZoom] = useState(false);
     return (
         <div className="h-screen w-full bg-black">
-            <Canvas camera={{ position: [0, 2, 5], fov: 50 }}>
+            <Canvas
+                camera={{ position: [0, 2, 5], fov: 50 }}
+                gl={{
+                    stencil: true,
+                }}
+            >
                 <Suspense fallback={null}>
                     <ambientLight intensity={0.5} />
                     <directionalLight
@@ -26,19 +31,6 @@ export default function Playground() {
                         castShadow
                     />
 
-                    <mesh position={[0, 0.5, 0]}>
-                        <boxGeometry />
-                        <meshStandardMaterial color="orange" />
-                    </mesh>
-
-                    <mesh
-                        rotation={[-Math.PI / 2, 0, 0]}
-                        position={[0, 0, 0]}
-                        receiveShadow
-                    >
-                        <planeGeometry args={[10, 10]} />
-                        <meshStandardMaterial color="#444" />
-                    </mesh>
                     <WorkExperienceText
                         onHoverChange={setDisableZoom}
                         fields={WORK_EXPERIENCE_MOCKS}
