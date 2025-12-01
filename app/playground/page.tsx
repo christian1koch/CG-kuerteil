@@ -6,23 +6,31 @@ import {
     Environment,
     ContactShadows,
     Text,
-    PerspectiveCamera,
-    Hud,
 } from "@react-three/drei";
 import { Suspense, useState } from "react";
 import { WorkExperienceText } from "../beleg/Texts";
 import { WORK_EXPERIENCE_MOCKS } from "../beleg/constants";
-import { Button } from "@react-three/uikit-default";
-import { Text as UiText, Container, Portal } from "@react-three/uikit";
-import { Mails, Smile } from "@react-three/uikit-lucide";
-import { Briefcase } from "../beleg/Briefcase";
-import { Statue } from "../beleg/Statue";
-import { Book } from "../beleg/Book";
-import { Envelope } from "../beleg/Envelope";
-import { MeshBasicMaterial } from "three";
+import { NavigationHud } from "../components/NavigationHud";
 
 export default function Playground() {
     const [disableZoom, setDisableZoom] = useState(false);
+
+    const handleAboutMeClick = () => {
+        console.log("About me clicked");
+    };
+
+    const handleWorkExperienceClick = () => {
+        console.log("Work Experience clicked");
+    };
+
+    const handleEducationClick = () => {
+        console.log("Education clicked");
+    };
+
+    const handleContactMeClick = () => {
+        console.log("Contact me clicked");
+    };
+
     return (
         <div className="h-screen w-full">
             <Canvas
@@ -53,55 +61,12 @@ export default function Playground() {
                     <OrbitControls enableZoom={!disableZoom} />
                     <Environment preset="city" />
                 </Suspense>
-                <Hud>
-                    <ambientLight intensity={10} />
-                    <PerspectiveCamera makeDefault position={[2.5, -2.5, 6]} />
-                    <Container gap={20} flexDirection={"row"}>
-                        <Button variant="outline">
-                            <Container padding={0.2}>
-                                <UiText>About me</UiText>
-                                <Portal width={30} aspectRatio={1}>
-                                    <ambientLight intensity={2} />
-                                    <Statue
-                                        scale={0.05}
-                                        position={[0, -0.2, 0]}
-                                    />
-                                </Portal>
-                            </Container>
-                        </Button>
-                        <Button variant="outline">
-                            <Container padding={0.2} gap={5}>
-                                <UiText>Work Experience</UiText>{" "}
-                                <Portal width={50} aspectRatio={1}>
-                                    <ambientLight intensity={10} />
-                                    <Briefcase
-                                        scale={2}
-                                        position={[0, -1, 0]}
-                                    />
-                                </Portal>
-                            </Container>
-                        </Button>
-                        <Button variant="outline">
-                            <Container padding={0.2} gap={5}>
-                                <UiText>Education</UiText>{" "}
-                                <Portal width={30} aspectRatio={1}>
-                                    <ambientLight intensity={2} />
-                                    <Book
-                                        scale={3}
-                                        rotation={[Math.PI / 2, 0, 0]}
-                                        position={[0, -0.2, 0]}
-                                    />
-                                </Portal>
-                            </Container>
-                        </Button>
-                        <Button variant="outline">
-                            <Container padding={0.2} gap={5}>
-                                <UiText>Contact me</UiText>
-                                <Mails />
-                            </Container>
-                        </Button>
-                    </Container>
-                </Hud>
+                <NavigationHud
+                    onAboutMeClick={handleAboutMeClick}
+                    onWorkExperienceClick={handleWorkExperienceClick}
+                    onEducationClick={handleEducationClick}
+                    onContactMeClick={handleContactMeClick}
+                />
             </Canvas>
         </div>
     );

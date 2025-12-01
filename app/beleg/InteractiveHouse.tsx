@@ -7,6 +7,7 @@ import * as THREE from "three";
 import { DEBUG_MODE, WORK_EXPERIENCE_MOCKS } from "./constants";
 import { CameraControls } from "@react-three/drei";
 import { WorkExperienceText } from "./Texts";
+import { NavigationHud } from "../components/NavigationHud";
 
 const Positions = {
     ROOM: new THREE.Vector3(1.8, 1.3, -0.5),
@@ -109,6 +110,11 @@ export function InteractiveHouse() {
                 maxPolarAngle={Math.PI / 2}
                 dollySpeed={disableZoom ? 0 : 1}
                 truckSpeed={disableZoom ? 0 : 2}
+            />
+            <NavigationHud
+                onAboutMeClick={() => {
+                    console.log("About me clocked");
+                }}
             />
             <WorkExperienceText
                 fields={WORK_EXPERIENCE_MOCKS}
