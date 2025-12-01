@@ -8,7 +8,7 @@ import {
     Text,
 } from "@react-three/drei";
 import { Suspense, useState } from "react";
-import { WorkExperienceText } from "../beleg/Texts";
+import { WorkExperienceText } from "../beleg/Text";
 import { WORK_EXPERIENCE_MOCKS } from "../beleg/constants";
 import { NavigationHud } from "../components/NavigationHud";
 

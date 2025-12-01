@@ -4,9 +4,13 @@ import { Briefcase } from "./Briefcase";
 import { Envelope } from "./Envelope";
 import { Statue } from "./Statue";
 import * as THREE from "three";
-import { DEBUG_MODE, WORK_EXPERIENCE_MOCKS } from "./constants";
+import {
+    DEBUG_MODE,
+    EDUCATION_MOCKS,
+    WORK_EXPERIENCE_MOCKS,
+} from "./constants";
 import { CameraControls } from "@react-three/drei";
-import { WorkExperienceText } from "./Texts";
+import { EducationText, WorkExperienceText } from "./Text";
 import { NavigationHud } from "../components/NavigationHud";
 
 const Positions = {
@@ -122,6 +126,13 @@ export function InteractiveHouse() {
                 position={[1.78, 1.7, -2.92]}
                 rotation={[Math.PI / 32, -Math.PI, 0]}
                 scale={0.055}
+            />
+            <EducationText
+                fields={EDUCATION_MOCKS}
+                onHoverChange={setDisableZoom}
+                position={[-5.5, 2.6, -2.4]}
+                rotation={[0, -Math.PI, 0]}
+                scale={0.2}
             />
             <MeshCameraTargetControl space={selectedRoom} ref={meshRef} />
             <Briefcase onClick={() => setSelectedRoom(Spaces.Office)} />
