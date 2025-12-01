@@ -3,6 +3,9 @@ import { Book } from "./Book";
 import { Briefcase } from "./Briefcase";
 import { Envelope } from "./Envelope";
 import { Statue } from "./Statue";
+import { Chalkboard } from "./Chalkboard";
+import { Lantern } from "./Lantern";
+import { Tree } from "./Tree";
 import * as THREE from "three";
 import {
     ABOUT_ME_MOCK,
@@ -10,7 +13,7 @@ import {
     EDUCATION_MOCKS,
     WORK_EXPERIENCE_MOCKS,
 } from "./constants";
-import { CameraControls, useFont } from "@react-three/drei";
+import { CameraControls } from "@react-three/drei";
 import { AboutMeText, EducationText, WorkExperienceText } from "./Text";
 import { NavigationHud } from "../components/NavigationHud";
 import { Frame } from "./Frame";
@@ -26,9 +29,6 @@ import {
     HueSaturation,
     Grid,
     ChromaticAberration,
-    Ramp,
-    RampType,
-    ToneMapping,
     BrightnessContrast,
 } from "@react-three/postprocessing";
 import { BlendFunction } from "postprocessing";
@@ -220,6 +220,22 @@ export function InteractiveHouse() {
                     stencilBuffer
                 >
                     <Sepia
+                        intensity={0.5} // sepia intensity
+                        blendFunction={BlendFunction.LINEAR_BURN} // blend mode
+                    />
+                    <BrightnessContrast
+                        brightness={0.05} // brightness. min: -1, max: 1
+                        contrast={0.92} // contrast: min -1, max: 1
+                    />
+                </EffectComposer>
+            )}
+            {selectedRoom === Spaces.Garden && (
+                <EffectComposer
+                    enableNormalPass={false}
+                    multisampling={0}
+                    stencilBuffer
+                >
+                    <Sepia
                         intensity={1} // sepia intensity
                         blendFunction={BlendFunction.DIFFERENCE} // blend mode
                     />
@@ -236,6 +252,9 @@ export function InteractiveHouse() {
             <Book onClick={() => setSelectedRoom(Spaces.School)} />
             <Envelope onClick={() => setSelectedRoom(Spaces.Garden)} />
             <Statue onClick={() => setSelectedRoom(Spaces.Bedroom)} />
+            <Chalkboard specialEffect={selectedRoom === Spaces.School} />
+            <Lantern specialEffect={selectedRoom === Spaces.Garden} />
+            <Tree specialEffect={selectedRoom === Spaces.Garden} />
         </>
     );
 }
