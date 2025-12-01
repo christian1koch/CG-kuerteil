@@ -26,7 +26,7 @@ enum Spaces {
 
 const Positions: Record<Spaces, THREE.Vector3> = {
     [Spaces.Initial]: new THREE.Vector3(1.8, 1.3, -0.5),
-    [Spaces.Bedroom]: new THREE.Vector3(2.5, 1.3, -0.5),
+    [Spaces.Bedroom]: new THREE.Vector3(-0.4, 2.8, -1.2),
     [Spaces.Office]: new THREE.Vector3(1.62, 1.5, -2.6),
     [Spaces.School]: new THREE.Vector3(-6.1, 2.2, -3),
     [Spaces.Garden]: new THREE.Vector3(-6.62, 2.2, 1.5),
@@ -34,7 +34,7 @@ const Positions: Record<Spaces, THREE.Vector3> = {
 
 const Rotation: Record<Spaces, THREE.Euler> = {
     [Spaces.Initial]: new THREE.Euler(-Math.PI / 6, Math.PI, 0),
-    [Spaces.Bedroom]: new THREE.Euler(-Math.PI / 6, Math.PI - 0.5, 0),
+    [Spaces.Bedroom]: new THREE.Euler(0, Math.PI, 0),
     [Spaces.Office]: new THREE.Euler(Math.PI / 24, 0, 0),
     [Spaces.School]: new THREE.Euler(Math.PI / 24, 0, 0),
     [Spaces.Garden]: new THREE.Euler(Math.PI, 0, 0),
@@ -149,14 +149,18 @@ export function InteractiveHouse() {
                 rotation={[0, -Math.PI, 0]}
                 scale={0.2}
             />
-            <AboutMeText field={ABOUT_ME_MOCK} />
+            <AboutMeText
+                field={ABOUT_ME_MOCK}
+                scale={0.3}
+                position={[-0.8, 3.2, -1.55]}
+            />
             <Frame />
             <PosterPlane position={[-0.2, 2.8, -1.55]} scale={0.4} />
             <MeshCameraTargetControl space={selectedRoom} ref={meshRef} />
             <Briefcase onClick={() => setSelectedRoom(Spaces.Office)} />
             <Book onClick={() => setSelectedRoom(Spaces.School)} />
             <Envelope onClick={() => setSelectedRoom(Spaces.Garden)} />
-            <Statue onClick={() => setSelectedRoom(Spaces.Initial)} />
+            <Statue onClick={() => setSelectedRoom(Spaces.Bedroom)} />
         </>
     );
 }

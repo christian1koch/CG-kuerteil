@@ -35,11 +35,11 @@ function SceneContainer() {
             <InteractiveHouse />
             <Scene castShadow receiveShadow />
 
-            <EffectComposer>
+            <EffectComposer enableNormalPass={false} multisampling={0}>
                 <Bloom
                     luminanceThreshold={1}
                     mipmapBlur
-                    intensity={1}
+                    intensity={1.5}
                     radius={0.6}
                 />
             </EffectComposer>
