@@ -12,530 +12,544 @@ import { Statue } from "./Statue";
 import { Lamp } from "./Lamp";
 
 export function Scene(props: ThreeElements["group"]) {
-  const { nodes, materials } = useGLTF("/Scene1.glb") as any;
-  return (
-    <group {...props}>
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.Cube001.geometry}
-        material={materials.Material}
-        position={[-6.411, -0.021, -4.282]}
-        scale={[2.984, 0.04, 1.989]}
-      />
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.bed_single_A.geometry}
-        material={materials["furniture_texture.008"]}
-        position={[-1.787, 0.097, -0.062]}
-      />
-      <Lamp />
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.chair_B.geometry}
-        material={materials["furniture_texture.002"]}
-        position={[1.8, 0.104, 0.053]}
-        rotation={[Math.PI, 0, Math.PI]}
-        scale={0.769}
-      />
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.rug003.geometry}
-        material={materials["tiny_treats_1.058"]}
-        position={[-0.11, 0, 0.064]}
-        scale={[2.058, 1, 2.038]}
-      />
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.table_medium_long.geometry}
-        material={materials["furniture_texture.007"]}
-        position={[1.795, 0.096, -0.912]}
-        scale={0.672}
-      />
-      <group position={[-2.942, 0, 1.131]} rotation={[0, 1.571, 0]}>
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.wall_panelled_bakery_straight001_1.geometry}
-          material={materials["tiny_treats_1.068"]}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.wall_panelled_bakery_straight001_2.geometry}
-          material={materials["tiny_treats_1.065"]}
-        />
-      </group>
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.wall_modular_tiles_kitchen_corner_outer_B.geometry}
-        material={materials["tiny_treats_1.074"]}
-        position={[-3.188, 0, -2.12]}
-        rotation={[0, Math.PI / 2, 0]}
-      />
-      <group position={[-0.942, 0.048, -4.268]} scale={[2.064, 0.04, 2]}>
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Cube_1.geometry}
-          material={materials.Planos}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Cube_2.geometry}
-          material={materials.Huecos}
-        />
-      </group>
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.Book_Pile_1.geometry}
-        material={materials.Palette}
-        position={[-2.77, 0.713, -3.904]}
-        rotation={[Math.PI / 2, 0, 0]}
-        scale={0.014}
-      />
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.Book_Pile_1_alt.geometry}
-        material={materials.Palette}
-        position={[-2.743, 1.305, -4.352]}
-        rotation={[Math.PI / 2, 0, 0]}
-        scale={0.014}
-      />
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.Book_Pile_2.geometry}
-        material={materials.Palette}
-        position={[-2.741, 1.885, -3.361]}
-        rotation={[Math.PI / 2, 0, 0]}
-        scale={0.014}
-      />
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.Book_Pile_2_alt.geometry}
-        material={materials.Palette}
-        position={[-2.741, 1.885, -4.044]}
-        rotation={[Math.PI / 2, 0, 0]}
-        scale={0.014}
-      />
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.Chair_Base.geometry}
-        material={materials.Palette}
-        position={[1.217, 0, -3.817]}
-        rotation={[Math.PI / 2, 0, 0]}
-        scale={0.014}
-      />
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.Deco.geometry}
-        material={materials.Palette}
-        position={[0.448, 1.235, -3.067]}
-        rotation={[Math.PI / 2, 0, Math.PI]}
-        scale={0.012}
-      />
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.Deco_2.geometry}
-        material={materials.Palette}
-        position={[0.448, 1.235, -3.19]}
-        rotation={[Math.PI / 2, 0, Math.PI]}
-        scale={0.012}
-      />
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.Deco_3.geometry}
-        material={materials.Palette}
-        position={[0.448, 1.235, -2.944]}
-        rotation={[Math.PI / 2, 0, Math.PI]}
-        scale={0.012}
-      />
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.Deco_4.geometry}
-        material={materials.Palette}
-        position={[0.448, 1.235, -2.821]}
-        rotation={[Math.PI / 2, 0, Math.PI]}
-        scale={0.012}
-      />
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.Desk.geometry}
-        material={materials.Palette}
-        position={[1.255, 0.065, -2.882]}
-        rotation={[Math.PI / 2, 0, Math.PI]}
-        scale={0.012}
-      />
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.Desk_Ac.geometry}
-        material={materials.Palette}
-        position={[1.255, 1.097, -3.139]}
-        rotation={[Math.PI / 2, 0, Math.PI]}
-        scale={0.012}
-      />
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.Modern_Shelves.geometry}
-        material={materials.Palette}
-        position={[-2.693, 0, -3.796]}
-        rotation={[Math.PI / 2, 0, Math.PI / 2]}
-        scale={0.016}
-      />
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.Modern_Shelves_2.geometry}
-        material={materials.Palette}
-        position={[-0.838, 2.708, -2.541]}
-        rotation={[Math.PI / 2, 0, 0]}
-        scale={0.01}
-      />
-      <group
-        position={[1.14, 2.593, -2.399]}
-        rotation={[Math.PI / 2, 0, Math.PI]}
-        scale={0.025}
-      >
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Cube009.geometry}
-          material={materials.Palette}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Cube009_1.geometry}
-          material={materials.Paintings}
-        />
-      </group>
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.PC_Case.geometry}
-        material={materials.Palette}
-        position={[0.73, 1.235, -2.715]}
-        rotation={[Math.PI / 2, 0, Math.PI]}
-        scale={0.012}
-      />
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.PC_Keyboard.geometry}
-        material={materials.Palette}
-        position={[1.603, 1.11, -3.348]}
-        rotation={[Math.PI / 2, 0, Math.PI]}
-        scale={0.012}
-      />
-      <group
-        position={[1.625, 1.235, -2.804]}
-        rotation={[Math.PI / 2, 0, Math.PI]}
-        scale={0.012}
-      >
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Cube074.geometry}
-          material={materials.Palette}
-        />
-        <mesh castShadow receiveShadow geometry={nodes.Cube074_1.geometry}>
-          <meshBasicMaterial color="black" />
-        </mesh>
-      </group>
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.PC_Mouse.geometry}
-        material={materials.Palette}
-        position={[0.716, 1.118, -3.25]}
-        rotation={[Math.PI / 2, 0, 0]}
-        scale={0.012}
-      />
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.PC_Mouse_Pad.geometry}
-        material={materials.Palette}
-        position={[0.713, 1.103, -3.275]}
-        rotation={[Math.PI / 2, 0, Math.PI]}
-        scale={0.012}
-      />
-      <group
-        position={[-0.859, 2.959, -2.558]}
-        rotation={[-Math.PI, 0, 0]}
-        scale={-0.803}
-      >
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Plane017.geometry}
-          material={materials["normal .005"]}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Plane017_1.geometry}
-          material={materials["fer.004"]}
-        />
-      </group>
-      <group position={[-0.705, 3.324, -2.552]} scale={0.781}>
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Plane028.geometry}
-          material={materials["normal .005"]}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Plane028_1.geometry}
-          material={materials["fer.004"]}
-        />
-      </group>
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.wall_modular_tiles_kitchen_corner_outer_B001.geometry}
-        material={materials["tiny_treats_1.074"]}
-        position={[-3.188, 0, -2.123]}
-        rotation={[Math.PI, 1.571, 0]}
-        scale={-1}
-      />
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.wall_modular_tiles_kitchen_corner_outer_B002.geometry}
-        material={materials["tiny_treats_1.074"]}
-        position={[-3.188, 0, -2.115]}
-        rotation={[0, -1.571, 0]}
-      />
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.demoscene001.geometry}
-        material={materials["normal .036"]}
-        position={[-6.216, 2.196, -2.483]}
-        scale={[0.556, 1, 1]}
-      />
-      <group position={[-4.795, 0, -2.186]}>
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Cube179.geometry}
-          material={materials["normal .036"]}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Cube179_1.geometry}
-          material={materials["metalic mat.001"]}
-        />
-      </group>
-      <group position={[-3.322, 0, -2.186]}>
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Cube180.geometry}
-          material={materials["normal .036"]}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Cube180_1.geometry}
-          material={materials["metalic mat.001"]}
-        />
-      </group>
-      <group position={[-3.322, 0, -0.925]}>
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Cube181.geometry}
-          material={materials["normal .036"]}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Cube181_1.geometry}
-          material={materials["metalic mat.001"]}
-        />
-      </group>
-      <group position={[-4.795, 0, -0.925]}>
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Cube182.geometry}
-          material={materials["normal .036"]}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Cube182_1.geometry}
-          material={materials["metalic mat.001"]}
-        />
-      </group>
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.demoscene_2001.geometry}
-        material={materials["normal .036"]}
-        position={[-6.21, 3.249, -2.409]}
-      />
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.demoscene_8001.geometry}
-        material={materials["normal .036"]}
-        position={[-8.202, 0, -0.579]}
-        rotation={[0, 1.571, 0]}
-      />
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.demoscene_14001.geometry}
-        material={materials["normal .036"]}
-        position={[-8.202, 0, -0.579]}
-        rotation={[0, 1.571, 0]}
-      />
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.demoscene_15001.geometry}
-        material={materials["normal .036"]}
-        position={[-8.202, 0, -0.579]}
-        rotation={[0, 1.571, 0]}
-      />
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.demoscene_16001.geometry}
-        material={materials["normal .036"]}
-        position={[-8.202, 0, -0.579]}
-        rotation={[0, 1.571, 0]}
-      />
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.demoscene_17001.geometry}
-        material={materials["normal .036"]}
-        position={[-8.202, 0, -0.579]}
-        rotation={[0, 1.571, 0]}
-      />
-      <group position={[-3.655, 3.469, -4.248]} rotation={[0, 1.571, 0]}>
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Cube188.geometry}
-          material={materials["normal .036"]}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Cube188_1.geometry}
-          material={materials["metalic mat.001"]}
-        />
-      </group>
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.floor_grass_sliced_A.geometry}
-        material={materials.tiny_treats_grass}
-        position={[-8.421, 0.523, 1.428]}
-        rotation={[0, 1.571, 0]}
-      />
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.floor_grass_sliced_B.geometry}
-        material={materials["tiny_treats_grass.001"]}
-        position={[-4.456, 0.523, -0.561]}
-      />
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.floor_grass_sliced_base.geometry}
-        material={materials["tiny_treats_grass.002"]}
-        position={[-6.427, 0.523, -0.572]}
-      />
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.floor_grass_sliced_C.geometry}
-        material={materials["tiny_treats_grass.003"]}
-        position={[-4.468, 0.523, 1.413]}
-        rotation={[0, -Math.PI / 2, 0]}
-      />
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.floor_grass_sliced_D.geometry}
-        material={materials["tiny_treats_grass.004"]}
-        position={[-6.453, 0.523, 1.425]}
-        rotation={[0, 1.571, 0]}
-      />
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.floor_grass_sliced_E.geometry}
-        material={materials["tiny_treats_grass.005"]}
-        position={[-8.415, 0.523, -0.572]}
-      />
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.hedge_corner.geometry}
-        material={materials["tiny_treats_1.159"]}
-        position={[-3.863, 0, -1.613]}
-        rotation={[0, -1.571, 0]}
-      />
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.hedge_straight.geometry}
-        material={materials["tiny_treats_1.160"]}
-        position={[-3.766, 0, 1.168]}
-        rotation={[0, -1.571, 0]}
-      />
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.hedge_straight_long.geometry}
-        material={materials["tiny_treats_1.161"]}
-        position={[-7.742, 0, -1.621]}
-      />
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.street_lantern.geometry}
-        material={materials["tiny_treats_1.162"]}
-        position={[-8.623, 0, 0]}
-      />
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.tree_large.geometry}
-        material={materials["tiny_treats_1.165"]}
-        position={[-5.332, 0, 0]}
-      />
-    </group>
-  );
+    const { nodes, materials } = useGLTF("/Scene1.glb") as any;
+    return (
+        <group {...props}>
+            <mesh
+                castShadow
+                receiveShadow
+                geometry={nodes.Cube001.geometry}
+                material={materials.Material}
+                position={[-6.411, -0.021, -4.282]}
+                scale={[2.984, 0.04, 1.989]}
+            />
+            <mesh
+                castShadow
+                receiveShadow
+                geometry={nodes.bed_single_A.geometry}
+                material={materials["furniture_texture.008"]}
+                position={[-1.787, 0.097, -0.062]}
+            />
+            <Lamp />
+            <mesh
+                castShadow
+                receiveShadow
+                geometry={nodes.chair_B.geometry}
+                material={materials["furniture_texture.002"]}
+                position={[1.8, 0.104, 0.053]}
+                rotation={[Math.PI, 0, Math.PI]}
+                scale={0.769}
+            />
+            <mesh
+                castShadow
+                receiveShadow
+                geometry={nodes.rug003.geometry}
+                material={materials["tiny_treats_1.058"]}
+                position={[-0.11, 0, 0.064]}
+                scale={[2.058, 1, 2.038]}
+            />
+            <mesh
+                castShadow
+                receiveShadow
+                geometry={nodes.table_medium_long.geometry}
+                material={materials["furniture_texture.007"]}
+                position={[1.795, 0.096, -0.912]}
+                scale={0.672}
+            />
+            <group position={[-2.942, 0, 1.131]} rotation={[0, 1.571, 0]}>
+                <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.wall_panelled_bakery_straight001_1.geometry}
+                    material={materials["tiny_treats_1.068"]}
+                />
+                <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.wall_panelled_bakery_straight001_2.geometry}
+                    material={materials["tiny_treats_1.065"]}
+                />
+            </group>
+            <mesh
+                castShadow
+                receiveShadow
+                geometry={
+                    nodes.wall_modular_tiles_kitchen_corner_outer_B.geometry
+                }
+                material={materials["tiny_treats_1.074"]}
+                position={[-3.188, 0, -2.12]}
+                rotation={[0, Math.PI / 2, 0]}
+            />
+            <group position={[-0.942, 0.048, -4.268]} scale={[2.064, 0.04, 2]}>
+                <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.Cube_1.geometry}
+                    material={materials.Planos}
+                />
+                <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.Cube_2.geometry}
+                    material={materials.Huecos}
+                />
+            </group>
+            <mesh
+                castShadow
+                receiveShadow
+                geometry={nodes.Book_Pile_1.geometry}
+                material={materials.Palette}
+                position={[-2.77, 0.713, -3.904]}
+                rotation={[Math.PI / 2, 0, 0]}
+                scale={0.014}
+            />
+            <mesh
+                castShadow
+                receiveShadow
+                geometry={nodes.Book_Pile_1_alt.geometry}
+                material={materials.Palette}
+                position={[-2.743, 1.305, -4.352]}
+                rotation={[Math.PI / 2, 0, 0]}
+                scale={0.014}
+            />
+            <mesh
+                castShadow
+                receiveShadow
+                geometry={nodes.Book_Pile_2.geometry}
+                material={materials.Palette}
+                position={[-2.741, 1.885, -3.361]}
+                rotation={[Math.PI / 2, 0, 0]}
+                scale={0.014}
+            />
+            <mesh
+                castShadow
+                receiveShadow
+                geometry={nodes.Book_Pile_2_alt.geometry}
+                material={materials.Palette}
+                position={[-2.741, 1.885, -4.044]}
+                rotation={[Math.PI / 2, 0, 0]}
+                scale={0.014}
+            />
+            <mesh
+                castShadow
+                receiveShadow
+                geometry={nodes.Chair_Base.geometry}
+                material={materials.Palette}
+                position={[1.217, 0, -3.817]}
+                rotation={[Math.PI / 2, 0, 0]}
+                scale={0.014}
+            />
+            <mesh
+                castShadow
+                receiveShadow
+                geometry={nodes.Deco.geometry}
+                material={materials.Palette}
+                position={[0.448, 1.235, -3.067]}
+                rotation={[Math.PI / 2, 0, Math.PI]}
+                scale={0.012}
+            />
+            <mesh
+                castShadow
+                receiveShadow
+                geometry={nodes.Deco_2.geometry}
+                material={materials.Palette}
+                position={[0.448, 1.235, -3.19]}
+                rotation={[Math.PI / 2, 0, Math.PI]}
+                scale={0.012}
+            />
+            <mesh
+                castShadow
+                receiveShadow
+                geometry={nodes.Deco_3.geometry}
+                material={materials.Palette}
+                position={[0.448, 1.235, -2.944]}
+                rotation={[Math.PI / 2, 0, Math.PI]}
+                scale={0.012}
+            />
+            <mesh
+                castShadow
+                receiveShadow
+                geometry={nodes.Deco_4.geometry}
+                material={materials.Palette}
+                position={[0.448, 1.235, -2.821]}
+                rotation={[Math.PI / 2, 0, Math.PI]}
+                scale={0.012}
+            />
+            <mesh
+                castShadow
+                receiveShadow
+                geometry={nodes.Desk.geometry}
+                material={materials.Palette}
+                position={[1.255, 0.065, -2.882]}
+                rotation={[Math.PI / 2, 0, Math.PI]}
+                scale={0.012}
+            />
+            <mesh
+                castShadow
+                receiveShadow
+                geometry={nodes.Desk_Ac.geometry}
+                material={materials.Palette}
+                position={[1.255, 1.097, -3.139]}
+                rotation={[Math.PI / 2, 0, Math.PI]}
+                scale={0.012}
+            />
+            <mesh
+                castShadow
+                receiveShadow
+                geometry={nodes.Modern_Shelves.geometry}
+                material={materials.Palette}
+                position={[-2.693, 0, -3.796]}
+                rotation={[Math.PI / 2, 0, Math.PI / 2]}
+                scale={0.016}
+            />
+            <mesh
+                castShadow
+                receiveShadow
+                geometry={nodes.Modern_Shelves_2.geometry}
+                material={materials.Palette}
+                position={[-0.838, 2.708, -2.541]}
+                rotation={[Math.PI / 2, 0, 0]}
+                scale={0.01}
+            />
+            <group
+                position={[1.14, 2.593, -2.399]}
+                rotation={[Math.PI / 2, 0, Math.PI]}
+                scale={0.025}
+            >
+                <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.Cube009.geometry}
+                    material={materials.Palette}
+                />
+                <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.Cube009_1.geometry}
+                    material={materials.Paintings}
+                />
+            </group>
+            <mesh
+                castShadow
+                receiveShadow
+                geometry={nodes.PC_Case.geometry}
+                material={materials.Palette}
+                position={[0.73, 1.235, -2.715]}
+                rotation={[Math.PI / 2, 0, Math.PI]}
+                scale={0.012}
+            />
+            <mesh
+                castShadow
+                receiveShadow
+                geometry={nodes.PC_Keyboard.geometry}
+                material={materials.Palette}
+                position={[1.603, 1.11, -3.348]}
+                rotation={[Math.PI / 2, 0, Math.PI]}
+                scale={0.012}
+            />
+            <group
+                position={[1.625, 1.235, -2.804]}
+                rotation={[Math.PI / 2, 0, Math.PI]}
+                scale={0.012}
+            >
+                <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.Cube074.geometry}
+                    material={materials.Palette}
+                />
+                <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.Cube074_1.geometry}
+                >
+                    <meshBasicMaterial color="black" />
+                </mesh>
+            </group>
+            <mesh
+                castShadow
+                receiveShadow
+                geometry={nodes.PC_Mouse.geometry}
+                material={materials.Palette}
+                position={[0.716, 1.118, -3.25]}
+                rotation={[Math.PI / 2, 0, 0]}
+                scale={0.012}
+            />
+            <mesh
+                castShadow
+                receiveShadow
+                geometry={nodes.PC_Mouse_Pad.geometry}
+                material={materials.Palette}
+                position={[0.713, 1.103, -3.275]}
+                rotation={[Math.PI / 2, 0, Math.PI]}
+                scale={0.012}
+            />
+            <group
+                position={[-0.859, 2.959, -2.558]}
+                rotation={[-Math.PI, 0, 0]}
+                scale={-0.803}
+            >
+                <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.Plane017.geometry}
+                    material={materials["normal .005"]}
+                />
+                <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.Plane017_1.geometry}
+                    material={materials["fer.004"]}
+                />
+            </group>
+            <group position={[-0.705, 3.324, -2.552]} scale={0.781}>
+                <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.Plane028.geometry}
+                    material={materials["normal .005"]}
+                />
+                <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.Plane028_1.geometry}
+                    material={materials["fer.004"]}
+                />
+            </group>
+            <mesh
+                castShadow
+                receiveShadow
+                geometry={
+                    nodes.wall_modular_tiles_kitchen_corner_outer_B001.geometry
+                }
+                // material={materials["tiny_treats_1.074"]}
+                position={[-3.188, 0, -2.123]}
+                rotation={[Math.PI, 1.571, 0]}
+                scale={-1}
+            >
+                <meshStandardMaterial color="#f7ebd2" />
+            </mesh>
+            <mesh
+                castShadow
+                receiveShadow
+                geometry={
+                    nodes.wall_modular_tiles_kitchen_corner_outer_B002.geometry
+                }
+                // material={materials["tiny_treats_1.074"]}
+                position={[-3.188, 0, -2.115]}
+                rotation={[0, -1.571, 0]}
+            >
+                <meshStandardMaterial color="#f7ebd2" />
+            </mesh>
+            <mesh
+                castShadow
+                receiveShadow
+                geometry={nodes.demoscene001.geometry}
+                material={materials["normal .036"]}
+                position={[-6.216, 2.196, -2.483]}
+                scale={[0.556, 1, 1]}
+            />
+            <group position={[-4.795, 0, -2.186]}>
+                <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.Cube179.geometry}
+                    material={materials["normal .036"]}
+                />
+                <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.Cube179_1.geometry}
+                    material={materials["metalic mat.001"]}
+                />
+            </group>
+            <group position={[-3.322, 0, -2.186]}>
+                <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.Cube180.geometry}
+                    material={materials["normal .036"]}
+                />
+                <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.Cube180_1.geometry}
+                    material={materials["metalic mat.001"]}
+                />
+            </group>
+            <group position={[-3.322, 0, -0.925]}>
+                <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.Cube181.geometry}
+                    material={materials["normal .036"]}
+                />
+                <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.Cube181_1.geometry}
+                    material={materials["metalic mat.001"]}
+                />
+            </group>
+            <group position={[-4.795, 0, -0.925]}>
+                <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.Cube182.geometry}
+                    material={materials["normal .036"]}
+                />
+                <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.Cube182_1.geometry}
+                    material={materials["metalic mat.001"]}
+                />
+            </group>
+            <mesh
+                castShadow
+                receiveShadow
+                geometry={nodes.demoscene_2001.geometry}
+                material={materials["normal .036"]}
+                position={[-6.21, 3.249, -2.409]}
+            />
+            <mesh
+                castShadow
+                receiveShadow
+                geometry={nodes.demoscene_8001.geometry}
+                material={materials["normal .036"]}
+                position={[-8.202, 0, -0.579]}
+                rotation={[0, 1.571, 0]}
+            />
+            <mesh
+                castShadow
+                receiveShadow
+                geometry={nodes.demoscene_14001.geometry}
+                material={materials["normal .036"]}
+                position={[-8.202, 0, -0.579]}
+                rotation={[0, 1.571, 0]}
+            />
+            <mesh
+                castShadow
+                receiveShadow
+                geometry={nodes.demoscene_15001.geometry}
+                material={materials["normal .036"]}
+                position={[-8.202, 0, -0.579]}
+                rotation={[0, 1.571, 0]}
+            />
+            <mesh
+                castShadow
+                receiveShadow
+                geometry={nodes.demoscene_16001.geometry}
+                material={materials["normal .036"]}
+                position={[-8.202, 0, -0.579]}
+                rotation={[0, 1.571, 0]}
+            />
+            <mesh
+                castShadow
+                receiveShadow
+                geometry={nodes.demoscene_17001.geometry}
+                material={materials["normal .036"]}
+                position={[-8.202, 0, -0.579]}
+                rotation={[0, 1.571, 0]}
+            />
+            <group position={[-3.655, 3.469, -4.248]} rotation={[0, 1.571, 0]}>
+                <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.Cube188.geometry}
+                    material={materials["normal .036"]}
+                />
+                <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.Cube188_1.geometry}
+                    material={materials["metalic mat.001"]}
+                />
+            </group>
+            <mesh
+                castShadow
+                receiveShadow
+                geometry={nodes.floor_grass_sliced_A.geometry}
+                material={materials.tiny_treats_grass}
+                position={[-8.421, 0.523, 1.428]}
+                rotation={[0, 1.571, 0]}
+            />
+            <mesh
+                castShadow
+                receiveShadow
+                geometry={nodes.floor_grass_sliced_B.geometry}
+                material={materials["tiny_treats_grass.001"]}
+                position={[-4.456, 0.523, -0.561]}
+            />
+            <mesh
+                castShadow
+                receiveShadow
+                geometry={nodes.floor_grass_sliced_base.geometry}
+                material={materials["tiny_treats_grass.002"]}
+                position={[-6.427, 0.523, -0.572]}
+            />
+            <mesh
+                castShadow
+                receiveShadow
+                geometry={nodes.floor_grass_sliced_C.geometry}
+                material={materials["tiny_treats_grass.003"]}
+                position={[-4.468, 0.523, 1.413]}
+                rotation={[0, -Math.PI / 2, 0]}
+            />
+            <mesh
+                castShadow
+                receiveShadow
+                geometry={nodes.floor_grass_sliced_D.geometry}
+                material={materials["tiny_treats_grass.004"]}
+                position={[-6.453, 0.523, 1.425]}
+                rotation={[0, 1.571, 0]}
+            />
+            <mesh
+                castShadow
+                receiveShadow
+                geometry={nodes.floor_grass_sliced_E.geometry}
+                material={materials["tiny_treats_grass.005"]}
+                position={[-8.415, 0.523, -0.572]}
+            />
+            <mesh
+                castShadow
+                receiveShadow
+                geometry={nodes.hedge_corner.geometry}
+                material={materials["tiny_treats_1.159"]}
+                position={[-3.863, 0, -1.613]}
+                rotation={[0, -1.571, 0]}
+            />
+            <mesh
+                castShadow
+                receiveShadow
+                geometry={nodes.hedge_straight.geometry}
+                material={materials["tiny_treats_1.160"]}
+                position={[-3.766, 0, 1.168]}
+                rotation={[0, -1.571, 0]}
+            />
+            <mesh
+                castShadow
+                receiveShadow
+                geometry={nodes.hedge_straight_long.geometry}
+                material={materials["tiny_treats_1.161"]}
+                position={[-7.742, 0, -1.621]}
+            />
+            <mesh
+                castShadow
+                receiveShadow
+                geometry={nodes.street_lantern.geometry}
+                material={materials["tiny_treats_1.162"]}
+                position={[-8.623, 0, 0]}
+            />
+            <mesh
+                castShadow
+                receiveShadow
+                geometry={nodes.tree_large.geometry}
+                material={materials["tiny_treats_1.165"]}
+                position={[-5.332, 0, 0]}
+            />
+        </group>
+    );
 }
 
 useGLTF.preload("/Scene1.glb");

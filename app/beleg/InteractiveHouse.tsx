@@ -130,7 +130,7 @@ export function InteractiveHouse() {
             <EducationText
                 fields={EDUCATION_MOCKS}
                 onHoverChange={setDisableZoom}
-                position={[-5.5, 2.6, -2.4]}
+                position={[-5.5, 2.7, -2.4]}
                 rotation={[0, -Math.PI, 0]}
                 scale={0.2}
             />
