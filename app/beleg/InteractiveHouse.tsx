@@ -15,7 +15,17 @@ import { AboutMeText, EducationText, WorkExperienceText } from "./Text";
 import { NavigationHud } from "../components/NavigationHud";
 import { Frame } from "./Frame";
 import { PosterPlane } from "./PosterPlane";
-import { EffectComposer, Bloom } from "@react-three/postprocessing";
+import {
+    EffectComposer,
+    Bloom,
+    Glitch,
+    Noise,
+    Scanline,
+    Vignette,
+    Sepia,
+    HueSaturation,
+    Grid,
+} from "@react-three/postprocessing";
 
 enum Spaces {
     Initial,
@@ -158,13 +168,36 @@ export function InteractiveHouse() {
                 visible={selectedRoom === Spaces.Bedroom}
             />
             {selectedRoom === Spaces.Bedroom && (
-                <EffectComposer enableNormalPass={false} multisampling={0}>
+                <EffectComposer
+                    enableNormalPass={false}
+                    multisampling={0}
+                    stencilBuffer
+                >
                     <Bloom
                         luminanceThreshold={1}
                         mipmapBlur
                         intensity={1.5}
                         radius={0.6}
                     />
+                </EffectComposer>
+            )}
+            {selectedRoom === Spaces.Office && (
+                <EffectComposer
+                    enableNormalPass={false}
+                    multisampling={0}
+                    stencilBuffer
+                >
+                    <Glitch
+                        delay={new THREE.Vector2(1.5, 8)}
+                        duration={new THREE.Vector2(0.2, 0.5)}
+                        strength={new THREE.Vector2(0.3, 1.0)}
+                    />
+                    <Noise opacity={0.3} />
+                    <Scanline density={2.5} opacity={0.3} />
+                    <Vignette eskil={false} offset={0.1} darkness={1.1} />
+                    <Sepia intensity={0.4} />
+                    <HueSaturation hue={1.5} saturation={0.4} />
+                    <Grid />
                 </EffectComposer>
             )}
             <Frame />
