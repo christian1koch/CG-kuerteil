@@ -11,7 +11,7 @@ import { NavigationHud } from "../components/NavigationHud";
 
 const Positions = {
     ROOM: new THREE.Vector3(1.8, 1.3, -0.5),
-    OFFICE: new THREE.Vector3(1.62, 1.5, -2.5),
+    OFFICE: new THREE.Vector3(1.62, 1.5, -2.6),
     SCHOOL: new THREE.Vector3(-6.1, 2.2, -3),
     GARDEN: new THREE.Vector3(-6.62, 2.2, 1.5),
 };
