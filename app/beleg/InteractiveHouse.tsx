@@ -5,12 +5,13 @@ import { Envelope } from "./Envelope";
 import { Statue } from "./Statue";
 import * as THREE from "three";
 import {
+    ABOUT_ME_MOCK,
     DEBUG_MODE,
     EDUCATION_MOCKS,
     WORK_EXPERIENCE_MOCKS,
 } from "./constants";
 import { CameraControls, useFont } from "@react-three/drei";
-import { EducationText, WorkExperienceText } from "./Text";
+import { AboutMeText, EducationText, WorkExperienceText } from "./Text";
 import { NavigationHud } from "../components/NavigationHud";
 import { Frame } from "./Frame";
 import { PosterPlane } from "./PosterPlane";
@@ -147,6 +148,11 @@ export function InteractiveHouse() {
                 position={[-5.5, 2.7, -2.4]}
                 rotation={[0, -Math.PI, 0]}
                 scale={0.2}
+            />
+            <AboutMeText
+                field={ABOUT_ME_MOCK}
+                visible={true}
+                position={[2.8, 1.7, -0.5]}
             />
             <Frame />
             <PosterPlane position={[-0.2, 2.8, -1.55]} scale={0.4} />

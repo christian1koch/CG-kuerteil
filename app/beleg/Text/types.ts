@@ -11,3 +11,7 @@ export interface EducationField {
     duration: string;
     details: string[];
 }
+
+export interface AboutMeField {
+    text: string;
+}
