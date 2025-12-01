@@ -7,7 +7,6 @@ import { ThreeElements } from "@react-three/fiber";
 
 export function Frame(props: ThreeElements["group"]) {
     const { nodes, materials } = useGLTF("/frame.glb") as any;
-    const texture = useTexture("/textures/patrick-texture.png");
 
     return (
         <group {...props} dispose={null}>
@@ -24,7 +23,7 @@ export function Frame(props: ThreeElements["group"]) {
                     geometry={nodes.Cube002_2.geometry}
                     rotation={[0, 0, Math.PI]}
                 >
-                    <meshStandardMaterial map={texture} />
+                    <meshStandardMaterial />
                 </mesh>
             </group>
         </group>
@@ -32,4 +31,3 @@ export function Frame(props: ThreeElements["group"]) {
 }
 
 useGLTF.preload("/frame.glb");
-useTexture.preload("/textures/patrick-texture.png");
