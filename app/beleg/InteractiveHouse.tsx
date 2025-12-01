@@ -25,6 +25,7 @@ import {
     Sepia,
     HueSaturation,
     Grid,
+    ChromaticAberration,
 } from "@react-three/postprocessing";
 
 enum Spaces {
@@ -179,6 +180,13 @@ export function InteractiveHouse() {
                         intensity={1.5}
                         radius={0.6}
                     />
+                    <ChromaticAberration
+                        offset={new THREE.Vector2(0.002, 0.002)}
+                        radialModulation={false}
+                        modulationOffset={0}
+                    />
+
+                    <Vignette eskil={false} offset={0.1} darkness={1.1} />
                 </EffectComposer>
             )}
             {selectedRoom === Spaces.Office && (
