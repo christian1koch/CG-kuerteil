@@ -10,12 +10,14 @@ export function EducationText({
     scale = 1,
     position = [0, 0, 0],
     rotation = [0, 0, 0],
+    visible = true,
 }: {
     fields: EducationField[];
     onHoverChange?: (isHovering: boolean) => void;
     scale?: number;
     position?: [number, number, number];
     rotation?: [number, number, number];
+    visible?: boolean;
 }) {
     const FONT_SIZE = 0.14;
     const LINE_HEIGHT = 1.4;
@@ -55,6 +57,7 @@ export function EducationText({
             scale={scale}
             position={position}
             rotation={rotation}
+            visible={visible}
         >
             {(stencil) => (
                 <>

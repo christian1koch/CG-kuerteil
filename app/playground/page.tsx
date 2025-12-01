@@ -11,6 +11,7 @@ import { Suspense, useState } from "react";
 import { WorkExperienceText } from "../beleg/Text";
 import { WORK_EXPERIENCE_MOCKS } from "../beleg/constants";
 import { NavigationHud } from "../components/NavigationHud";
+import { PosterPlane } from "../beleg/PosterPlane";
 
 export default function Playground() {
     const [disableZoom, setDisableZoom] = useState(false);
@@ -50,6 +51,7 @@ export default function Playground() {
                         onHoverChange={setDisableZoom}
                         fields={WORK_EXPERIENCE_MOCKS}
                     />
+
                     <ContactShadows
                         resolution={512}
                         scale={10}

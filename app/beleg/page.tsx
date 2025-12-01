@@ -15,7 +15,7 @@ function Loader() {
 
 export default function Beleg() {
     return (
-        <div className="h-screen bg-blue-300">
+        <div className="h-screen bg-gradient-to-b from-yellow-300 via-purple-600 to-black">
             <Canvas
                 shadows
                 camera={{ position: [0, 5, 10] }}

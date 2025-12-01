@@ -11,6 +11,7 @@ interface ScrollableStencilViewProps {
     rotation?: [number, number, number];
     width?: number;
     height?: number;
+    visible?: boolean;
     children: (stencil: any) => React.ReactNode;
 }
 
@@ -22,6 +23,7 @@ export function ScrollableStencilView({
     rotation = [0, 0, 0],
     width = 4,
     height = 5,
+    visible = true,
     children,
 }: ScrollableStencilViewProps) {
     const stencil = useMask(1, false);
@@ -62,7 +64,12 @@ export function ScrollableStencilView({
     });
 
     return (
-        <group position={position} rotation={rotation} scale={scale}>
+        <group
+            position={position}
+            rotation={rotation}
+            scale={scale}
+            visible={visible}
+        >
             <Mask id={1} position={[width / 2, -height / 2, 0]}>
                 <planeGeometry args={[width + 10, height + 1]} />
             </Mask>

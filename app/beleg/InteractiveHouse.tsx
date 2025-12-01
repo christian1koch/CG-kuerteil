@@ -9,22 +9,34 @@ import {
     EDUCATION_MOCKS,
     WORK_EXPERIENCE_MOCKS,
 } from "./constants";
-import { CameraControls } from "@react-three/drei";
+import { CameraControls, useFont } from "@react-three/drei";
 import { EducationText, WorkExperienceText } from "./Text";
 import { NavigationHud } from "../components/NavigationHud";
+import { Frame } from "./Frame";
+import { PosterPlane } from "./PosterPlane";
 
-const Positions = {
-    ROOM: new THREE.Vector3(1.8, 1.3, -0.5),
-    OFFICE: new THREE.Vector3(1.62, 1.5, -2.6),
-    SCHOOL: new THREE.Vector3(-6.1, 2.2, -3),
-    GARDEN: new THREE.Vector3(-6.62, 2.2, 1.5),
+enum Spaces {
+    Initial,
+    Bedroom,
+    Office,
+    School,
+    Garden,
+}
+
+const Positions: Record<Spaces, THREE.Vector3> = {
+    [Spaces.Initial]: new THREE.Vector3(1.8, 1.3, -0.5),
+    [Spaces.Bedroom]: new THREE.Vector3(2.5, 1.3, -0.5),
+    [Spaces.Office]: new THREE.Vector3(1.62, 1.5, -2.6),
+    [Spaces.School]: new THREE.Vector3(-6.1, 2.2, -3),
+    [Spaces.Garden]: new THREE.Vector3(-6.62, 2.2, 1.5),
 };
 
-const Rotation = {
-    ROOM: new THREE.Euler(-Math.PI / 6, Math.PI, 0),
-    OFFICE: new THREE.Euler(Math.PI / 24, 0, 0),
-    SCHOOL: new THREE.Euler(Math.PI / 24, 0, 0),
-    GARDEN: new THREE.Euler(Math.PI, 0, 0),
+const Rotation: Record<Spaces, THREE.Euler> = {
+    [Spaces.Initial]: new THREE.Euler(-Math.PI / 6, Math.PI, 0),
+    [Spaces.Bedroom]: new THREE.Euler(-Math.PI / 6, Math.PI - 0.5, 0),
+    [Spaces.Office]: new THREE.Euler(Math.PI / 24, 0, 0),
+    [Spaces.School]: new THREE.Euler(Math.PI / 24, 0, 0),
+    [Spaces.Garden]: new THREE.Euler(Math.PI, 0, 0),
 };
 
 /**
@@ -34,7 +46,7 @@ const Rotation = {
  * the camera and the targets
  */
 export function InteractiveHouse() {
-    const [selectedRoom, setSelectedRoom] = useState<Spaces>(Spaces.Bedroom);
+    const [selectedRoom, setSelectedRoom] = useState<Spaces>(Spaces.Initial);
     const [disableZoom, setDisableZoom] = useState(false);
 
     const controlsRef = useRef<CameraControls>(null!);
@@ -121,6 +133,7 @@ export function InteractiveHouse() {
                 }}
             />
             <WorkExperienceText
+                visible={selectedRoom === Spaces.Office}
                 fields={WORK_EXPERIENCE_MOCKS}
                 onHoverChange={setDisableZoom}
                 position={[1.78, 1.7, -2.92]}
@@ -128,26 +141,22 @@ export function InteractiveHouse() {
                 scale={0.055}
             />
             <EducationText
+                visible={selectedRoom === Spaces.School}
                 fields={EDUCATION_MOCKS}
                 onHoverChange={setDisableZoom}
                 position={[-5.5, 2.7, -2.4]}
                 rotation={[0, -Math.PI, 0]}
                 scale={0.2}
             />
+            <Frame />
+            <PosterPlane position={[-0.2, 2.8, -1.55]} scale={0.4} />
             <MeshCameraTargetControl space={selectedRoom} ref={meshRef} />
             <Briefcase onClick={() => setSelectedRoom(Spaces.Office)} />
             <Book onClick={() => setSelectedRoom(Spaces.School)} />
             <Envelope onClick={() => setSelectedRoom(Spaces.Garden)} />
-            <Statue onClick={() => setSelectedRoom(Spaces.Bedroom)} />
+            <Statue onClick={() => setSelectedRoom(Spaces.Initial)} />
         </>
     );
-}
-
-enum Spaces {
-    Bedroom,
-    Office,
-    School,
-    Garden,
 }
 
 interface MeshCameraTargetControl {
@@ -160,6 +169,8 @@ export function MeshCameraTargetControl({
     space,
 }: MeshCameraTargetControl) {
     switch (space) {
+        case Spaces.Initial:
+            return <InitialCameraTarget ref={ref} />;
         case Spaces.Bedroom:
             return <BedRoomCameraTarget ref={ref} />;
         case Spaces.Office:
@@ -176,8 +187,18 @@ export function MeshCameraTargetControl({
 export function OfficeCameraTargets({ ref }: { ref: Ref<THREE.Mesh> }) {
     return (
         <MeshCameraTarget
-            rotation={Rotation.OFFICE}
-            position={Positions.OFFICE}
+            rotation={Rotation[Spaces.Office]}
+            position={Positions[Spaces.Office]}
+            ref={ref}
+        />
+    );
+}
+
+export function InitialCameraTarget({ ref }: { ref: Ref<THREE.Mesh> }) {
+    return (
+        <MeshCameraTarget
+            rotation={Rotation[Spaces.Initial]}
+            position={Positions[Spaces.Initial]}
             ref={ref}
         />
     );
@@ -186,8 +207,8 @@ export function OfficeCameraTargets({ ref }: { ref: Ref<THREE.Mesh> }) {
 export function BedRoomCameraTarget({ ref }: { ref: Ref<THREE.Mesh> }) {
     return (
         <MeshCameraTarget
-            rotation={Rotation.ROOM}
-            position={Positions.ROOM}
+            rotation={Rotation[Spaces.Bedroom]}
+            position={Positions[Spaces.Bedroom]}
             ref={ref}
         />
     );
@@ -222,8 +243,8 @@ export function MeshCameraTarget({
 export function SchoolCameraTargets({ ref }: { ref: Ref<THREE.Mesh> }) {
     return (
         <MeshCameraTarget
-            rotation={Rotation.SCHOOL}
-            position={Positions.SCHOOL}
+            rotation={Rotation[Spaces.School]}
+            position={Positions[Spaces.School]}
             ref={ref}
         />
     );
@@ -232,8 +253,8 @@ export function SchoolCameraTargets({ ref }: { ref: Ref<THREE.Mesh> }) {
 export function GardenCameraTargets({ ref }: { ref: Ref<THREE.Mesh> }) {
     return (
         <MeshCameraTarget
-            rotation={Rotation.GARDEN}
-            position={Positions.GARDEN}
+            rotation={Rotation[Spaces.Garden]}
+            position={Positions[Spaces.Garden]}
             ref={ref}
         />
     );
