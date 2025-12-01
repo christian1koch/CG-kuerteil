@@ -15,6 +15,7 @@ import { AboutMeText, EducationText, WorkExperienceText } from "./Text";
 import { NavigationHud } from "../components/NavigationHud";
 import { Frame } from "./Frame";
 import { PosterPlane } from "./PosterPlane";
+import { EffectComposer, Bloom } from "@react-three/postprocessing";
 
 enum Spaces {
     Initial,
@@ -153,7 +154,18 @@ export function InteractiveHouse() {
                 field={ABOUT_ME_MOCK}
                 scale={0.3}
                 position={[-0.8, 3.2, -1.55]}
+                visible={selectedRoom === Spaces.Bedroom}
             />
+            {selectedRoom === Spaces.Bedroom && (
+                <EffectComposer enableNormalPass={false} multisampling={0}>
+                    <Bloom
+                        luminanceThreshold={1}
+                        mipmapBlur
+                        intensity={1.5}
+                        radius={0.6}
+                    />
+                </EffectComposer>
+            )}
             <Frame />
             <PosterPlane position={[-0.2, 2.8, -1.55]} scale={0.4} />
             <MeshCameraTargetControl space={selectedRoom} ref={meshRef} />
