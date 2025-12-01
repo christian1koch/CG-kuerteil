@@ -3,6 +3,8 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
     transpilePackages: [
         "three",
+        "@react-three/drei",
+        "@react-three/fiber",
         "@react-three/uikit",
         "@react-three/uikit-default",
         "@react-three/uikit-lucide",

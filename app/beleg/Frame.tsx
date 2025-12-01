@@ -7,7 +7,7 @@ import { ThreeElements } from "@react-three/fiber";
 
 export function Frame(props: ThreeElements["group"]) {
     const { nodes, materials } = useGLTF("/frame.glb") as any;
-    const texture = useTexture("/patrick.png");
+    const texture = useTexture("/patrick-texture.png");
 
     return (
         <group {...props} dispose={null}>
@@ -32,3 +32,4 @@ export function Frame(props: ThreeElements["group"]) {
 }
 
 useGLTF.preload("/frame.glb");
+useTexture.preload("/patrick-texture.png");
