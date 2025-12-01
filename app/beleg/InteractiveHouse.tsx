@@ -130,9 +130,10 @@ export function InteractiveHouse() {
                 truckSpeed={disableZoom ? 0 : 2}
             />
             <NavigationHud
-                onAboutMeClick={() => {
-                    console.log("About me clocked");
-                }}
+                onAboutMeClick={() => setSelectedRoom(Spaces.Bedroom)}
+                onWorkExperienceClick={() => setSelectedRoom(Spaces.Office)}
+                onEducationClick={() => setSelectedRoom(Spaces.School)}
+                onContactMeClick={() => setSelectedRoom(Spaces.Garden)}
             />
             <WorkExperienceText
                 visible={selectedRoom === Spaces.Office}
