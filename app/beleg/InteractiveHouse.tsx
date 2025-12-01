@@ -26,7 +26,12 @@ import {
     HueSaturation,
     Grid,
     ChromaticAberration,
+    Ramp,
+    RampType,
+    ToneMapping,
+    BrightnessContrast,
 } from "@react-three/postprocessing";
+import { BlendFunction } from "postprocessing";
 
 enum Spaces {
     Initial,
@@ -206,6 +211,22 @@ export function InteractiveHouse() {
                     <Sepia intensity={0.4} />
                     <HueSaturation hue={1.5} saturation={0.4} />
                     <Grid />
+                </EffectComposer>
+            )}
+            {selectedRoom === Spaces.School && (
+                <EffectComposer
+                    enableNormalPass={false}
+                    multisampling={0}
+                    stencilBuffer
+                >
+                    <Sepia
+                        intensity={1} // sepia intensity
+                        blendFunction={BlendFunction.DIFFERENCE} // blend mode
+                    />
+                    <BrightnessContrast
+                        brightness={0.25} // brightness. min: -1, max: 1
+                        contrast={0.9} // contrast: min -1, max: 1
+                    />
                 </EffectComposer>
             )}
             <Frame />
