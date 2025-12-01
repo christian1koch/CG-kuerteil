@@ -40,7 +40,7 @@ export function AboutMeText({
                 <meshStandardMaterial
                     color="#a600ff"
                     emissive="#a600ff"
-                    emissiveIntensity={2} // Increase this value for stronger glow
+                    emissiveIntensity={10} // Increase this value for stronger glow
                     toneMapped={false} // Important: allows colors to exceed 0-1 range for bloom
                 />
             </Text3D>

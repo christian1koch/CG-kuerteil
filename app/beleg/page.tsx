@@ -5,6 +5,7 @@ import { CameraControls, Html, useProgress } from "@react-three/drei";
 import { Ref, Suspense, useEffect, useRef } from "react";
 import * as THREE from "three";
 import { InteractiveHouse } from "./InteractiveHouse";
+import { EffectComposer, Bloom } from "@react-three/postprocessing";
 
 const DEBUG_MODE = true;
 
@@ -33,6 +34,15 @@ function SceneContainer() {
         <>
             <InteractiveHouse />
             <Scene castShadow receiveShadow />
+
+            <EffectComposer>
+                <Bloom
+                    luminanceThreshold={1}
+                    mipmapBlur
+                    intensity={1}
+                    radius={0.6}
+                />
+            </EffectComposer>
 
             <ambientLight intensity={1} />
             <directionalLight

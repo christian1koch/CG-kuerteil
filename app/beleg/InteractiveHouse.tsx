@@ -149,11 +149,7 @@ export function InteractiveHouse() {
                 rotation={[0, -Math.PI, 0]}
                 scale={0.2}
             />
-            <AboutMeText
-                field={ABOUT_ME_MOCK}
-                visible={true}
-                position={[2.8, 1.7, -0.5]}
-            />
+            <AboutMeText field={ABOUT_ME_MOCK} />
             <Frame />
             <PosterPlane position={[-0.2, 2.8, -1.55]} scale={0.4} />
             <MeshCameraTargetControl space={selectedRoom} ref={meshRef} />
