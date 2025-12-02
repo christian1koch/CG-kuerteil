@@ -32,6 +32,7 @@ import {
     BrightnessContrast,
 } from "@react-three/postprocessing";
 import { BlendFunction } from "postprocessing";
+import { Mailbox } from "./Mailbox";
 
 enum Spaces {
     Initial,
@@ -46,7 +47,7 @@ const Positions: Record<Spaces, THREE.Vector3> = {
     [Spaces.Bedroom]: new THREE.Vector3(-0.4, 2.8, -1.2),
     [Spaces.Office]: new THREE.Vector3(1.62, 1.5, -2.6),
     [Spaces.School]: new THREE.Vector3(-6.1, 2.2, -3),
-    [Spaces.Garden]: new THREE.Vector3(-6.62, 2.2, 1.5),
+    [Spaces.Garden]: new THREE.Vector3(-6.62, 2.2, 2),
 };
 
 const Rotation: Record<Spaces, THREE.Euler> = {
@@ -255,6 +256,13 @@ export function InteractiveHouse() {
             <Chalkboard specialEffect={selectedRoom === Spaces.School} />
             <Lantern specialEffect={selectedRoom === Spaces.Garden} />
             <Tree specialEffect={selectedRoom === Spaces.Garden} />
+            <Mailbox
+                position={[-7, 1, -2]}
+                scale={0.6}
+                onClick={() => {
+                    window.location.href = "mailto:example@email.com";
+                }}
+            />
         </>
     );
 }
