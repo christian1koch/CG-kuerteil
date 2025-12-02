@@ -11,7 +11,7 @@ import { Suspense, useState } from "react";
 import { WorkExperienceText } from "../beleg/Text";
 import { WORK_EXPERIENCE_MOCKS } from "../beleg/constants";
 import { NavigationHud } from "../components/NavigationHud";
-import { PosterPlane } from "../beleg/PosterPlane";
+import { PosterPlane } from "../beleg/models/PosterPlane";
 
 export default function Playground() {
     const [disableZoom, setDisableZoom] = useState(false);

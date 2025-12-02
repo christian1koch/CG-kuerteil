@@ -8,9 +8,10 @@ import {
     Fullscreen,
 } from "@react-three/uikit";
 import { Mails } from "@react-three/uikit-lucide";
-import { Briefcase } from "../beleg/Briefcase";
-import { Statue } from "../beleg/Statue";
-import { Book } from "../beleg/Book";
+
+import { Book } from "../beleg/models/Book";
+import { Statue } from "../beleg/models/Statue";
+import { Briefcase } from "../beleg/models/Briefcase";
 
 interface NavigationHudProps {
     onAboutMeClick?: () => void;

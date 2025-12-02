@@ -1,11 +1,9 @@
 import { Ref, useEffect, useRef, useState } from "react";
-import { Book } from "./Book";
-import { Briefcase } from "./Briefcase";
-import { Envelope } from "./Envelope";
-import { Statue } from "./Statue";
-import { Chalkboard } from "./Chalkboard";
-import { Lantern } from "./Lantern";
-import { Tree } from "./Tree";
+import { Book } from "./models/Book";
+import { Envelope } from "./models/Envelope";
+import { Chalkboard } from "./models/Chalkboard";
+import { Lantern } from "./models/Lantern";
+import { Tree } from "./models/Tree";
 import * as THREE from "three";
 import {
     ABOUT_ME_MOCK,
@@ -16,8 +14,8 @@ import {
 import { CameraControls } from "@react-three/drei";
 import { AboutMeText, EducationText, WorkExperienceText } from "./Text";
 import { NavigationHud } from "../components/NavigationHud";
-import { Frame } from "./Frame";
-import { PosterPlane } from "./PosterPlane";
+import { Frame } from "./models/Frame";
+import { PosterPlane } from "./models/PosterPlane";
 import {
     EffectComposer,
     Bloom,
@@ -33,6 +31,8 @@ import {
 } from "@react-three/postprocessing";
 import { BlendFunction } from "postprocessing";
 import { Mailbox } from "./Mailbox";
+import { Briefcase } from "./models/Briefcase";
+import { Statue } from "./models/Statue";
 
 enum Spaces {
     Initial,
