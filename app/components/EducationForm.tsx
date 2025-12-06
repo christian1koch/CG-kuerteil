@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Html } from "@react-three/drei";
 import {
     Card,
     CardContent,
@@ -17,12 +16,28 @@ import { Button } from "@/components/ui/button";
 type EducationFormProps = React.ComponentPropsWithRef<"div">;
 
 export function EducationForm(props: EducationFormProps) {
-    const [education, setEducation] = useState<EducationField>({
+    const emptyEducation: EducationField = {
         degree: "",
         institution: "",
         duration: "",
         details: [""],
-    });
+    };
+
+    const [educations, setEducations] = useState<EducationField[]>([
+        emptyEducation,
+    ]);
+
+    function addEducation() {
+        setEducations((s) => [...s, { ...emptyEducation }]);
+    }
+
+    function updateEducation(index: number, updated: EducationField) {
+        setEducations((s) => s.map((e, i) => (i === index ? updated : e)));
+    }
+
+    function removeEducation(index: number) {
+        setEducations((s) => s.filter((_, i) => i !== index));
+    }
 
     return (
         <div className="w-screen p-10" {...props}>
@@ -30,86 +45,112 @@ export function EducationForm(props: EducationFormProps) {
                 <h2 className="text-7xl font-extrabold tracking-tight text-balance">
                     Education
                 </h2>
-                <Button variant={"outline"}>Add Education</Button>
+                <Button variant={"outline"} onClick={addEducation}>
+                    Add Education
+                </Button>
             </div>
-            <EducationCard education={education} setEducation={setEducation} />
+
+            <div className="flex space-x-6">
+                {educations.map((education, idx) => (
+                    <EducationCard
+                        key={idx}
+                        index={idx}
+                        education={education}
+                        updateEducation={(u) => updateEducation(idx, u)}
+                        removeEducation={() => removeEducation(idx)}
+                        canRemove={educations.length > 1}
+                    />
+                ))}
+            </div>
         </div>
     );
 }
 
 function EducationCard({
+    index,
     education,
-    setEducation,
+    updateEducation,
+    removeEducation,
+    canRemove,
 }: {
+    index: number;
     education: EducationField;
-    setEducation: React.Dispatch<React.SetStateAction<EducationField>>;
+    updateEducation: (updated: EducationField) => void;
+    removeEducation: () => void;
+    canRemove: boolean;
 }) {
     return (
         <Card className="w-3xl max-w-sm bg-transparent">
             <CardHeader>
-                <CardTitle>Education</CardTitle>
+                <CardTitle>Education {index + 1}</CardTitle>
                 <CardDescription>Share your education details.</CardDescription>
                 <CardAction>
-                    <Button variant={"destructive"}>Remove</Button>
+                    <Button
+                        variant={"destructive"}
+                        onClick={() => canRemove && removeEducation()}
+                        disabled={!canRemove}
+                    >
+                        Remove
+                    </Button>
                 </CardAction>
             </CardHeader>
             <CardContent>
                 <div className="mb-2">
-                    <Label htmlFor="degree">Degree</Label>
+                    <Label htmlFor={`degree-${index}`}>Degree</Label>
                     <Input
-                        id="degree"
+                        id={`degree-${index}`}
                         value={education.degree}
                         onChange={(e) =>
-                            setEducation((s) => ({
-                                ...s,
+                            updateEducation({
+                                ...education,
                                 degree: e.target.value,
-                            }))
+                            })
                         }
                     />
                 </div>
 
                 <div className="mb-2">
-                    <Label htmlFor="institution">Institution</Label>
+                    <Label htmlFor={`institution-${index}`}>Institution</Label>
                     <Input
-                        id="institution"
+                        id={`institution-${index}`}
                         value={education.institution}
                         onChange={(e) =>
-                            setEducation((s) => ({
-                                ...s,
+                            updateEducation({
+                                ...education,
                                 institution: e.target.value,
-                            }))
+                            })
                         }
                     />
                 </div>
 
                 <div className="mb-2">
-                    <Label htmlFor="duration">Duration</Label>
+                    <Label htmlFor={`duration-${index}`}>Duration</Label>
                     <Input
-                        id="duration"
+                        id={`duration-${index}`}
                         value={education.duration}
                         onChange={(e) =>
-                            setEducation((s) => ({
-                                ...s,
+                            updateEducation({
+                                ...education,
                                 duration: e.target.value,
-                            }))
+                            })
                         }
                     />
                 </div>
 
                 <div>
-                    <Label htmlFor="education-details">
+                    <Label htmlFor={`education-details-${index}`}>
                         Details (one per line)
                     </Label>
                     <Textarea
-                        id="education-details"
+                        id={`education-details-${index}`}
                         value={education.details.join("\n")}
                         onChange={(e) =>
-                            setEducation((s) => ({
-                                ...s,
+                            updateEducation({
+                                ...education,
                                 details: e.target.value
                                     .split("\n")
                                     .map((l) => l.trim()),
-                            }))
+                            })
                         }
                         className="h-24 w-full resize-none rounded border p-2"
                     />
