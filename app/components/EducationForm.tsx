@@ -40,7 +40,7 @@ export function EducationForm(props: EducationFormProps) {
     }
 
     return (
-        <div className="w-screen p-10" {...props}>
+        <div className="h-screen w-screen p-10" {...props}>
             <div className="mb-10 flex items-center justify-between">
                 <h2 className="text-7xl font-extrabold tracking-tight text-balance">
                     Education

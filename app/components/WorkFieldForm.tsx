@@ -13,7 +13,7 @@ import { Label } from "@/components/ui/label";
 import { WorkExperienceField } from "../beleg/Text/types";
 import { Button } from "@/components/ui/button";
 
-export function WorkFieldForm() {
+export function WorkFieldForm(props: React.ComponentPropsWithRef<"div">) {
     const emptyWork: WorkExperienceField = {
         position: "",
         company: "",
@@ -36,7 +36,7 @@ export function WorkFieldForm() {
     }
 
     return (
-        <div className="w-full">
+        <div className="h-screen w-screen p-10" {...props}>
             <div className="mb-6 flex items-center justify-between">
                 <h3 className="text-2xl font-semibold">Work Experience</h3>
                 <Button variant="outline" onClick={addWork}>

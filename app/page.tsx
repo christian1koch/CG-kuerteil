@@ -40,7 +40,7 @@ function CVForm() {
 
     return (
         <>
-            <ScrollControls damping={1} pages={2}>
+            <ScrollControls damping={1} pages={3}>
                 <Scroll html>
                     <CVElements />
                 </Scroll>
@@ -83,10 +83,16 @@ function CVElements() {
     const scroll = useScroll();
     const educationRef = useRef<HTMLDivElement>(null);
     const aboutMeRef = useRef<HTMLDivElement>(null);
+    const workRef = useRef<HTMLDivElement>(null);
     useFrame(() => {
         const d = scroll.range(0, 1);
-        educationRef.current!.style.transform = `scale(${d})`;
-        aboutMeRef.current!.style.transform = `scale(${1 - d / 2})`;
+        const about = scroll.range(0, 1 / 3);
+        const education = scroll.range(0, 1 / 3);
+        const work = scroll.range(2 / 3, 1 / 3);
+        console.log(work, d);
+        aboutMeRef.current!.style.transform = `scale(${1 - about})`;
+        educationRef.current!.style.transform = `scale(${education - work})`;
+        workRef.current!.style.transform = `scale(${work})`;
     });
     return (
         <>
@@ -94,6 +100,7 @@ function CVElements() {
                 <AboutMeForm ref={aboutMeRef} />
             </div>
             <EducationForm ref={educationRef} />
+            <WorkFieldForm ref={workRef} />
         </>
     );
 }
