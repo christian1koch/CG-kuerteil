@@ -12,7 +12,9 @@ import { Input } from "../../components/ui/input";
 import { Label } from "../../components/ui/label";
 import { EducationField } from "../beleg/Text/types";
 
-export function EducationForm() {
+type EducationFormProps = React.ComponentPropsWithRef<"div">;
+
+export function EducationForm(props: EducationFormProps) {
     const [education, setEducation] = useState<EducationField>({
         degree: "",
         institution: "",
@@ -21,7 +23,7 @@ export function EducationForm() {
     });
 
     return (
-        <Html transform position={[15, 0, 0]}>
+        <div {...props}>
             <Card className="w-3xl max-w-sm">
                 <CardHeader>
                     <CardTitle>Education</CardTitle>
@@ -92,7 +94,7 @@ export function EducationForm() {
                     </div>
                 </CardContent>
             </Card>
-        </Html>
+        </div>
     );
 }
 

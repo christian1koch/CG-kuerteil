@@ -1,72 +1,107 @@
 "use client";
 
-import { Canvas } from "@react-three/fiber";
+import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { AboutMeForm } from "./components/ProfileForm";
 import {
-    Cloud,
-    Clouds,
     DragControls,
     Float,
-    MeshReflectorMaterial,
-    MeshRefractionMaterial,
+    MeshDistortMaterial,
     MeshTransmissionMaterial,
-    OrbitControls,
+    MeshWobbleMaterial,
+    Scroll,
+    ScrollControls,
     Sky,
+    Sparkles,
     Stars,
+    useScroll,
 } from "@react-three/drei";
-import { Fullscreen } from "@react-three/uikit";
 import WorkFieldForm from "./components/WorkFieldForm";
 import EducationForm from "./components/EducationForm";
-import { Mesh, TorusKnotGeometry } from "three";
-import { MeshMatcapMaterial, MeshStandardNodeMaterial } from "three/webgpu";
-import * as THREE from "three";
+import { Suspense, useRef } from "react";
+import { Statue } from "./beleg/models/Statue";
+import { StatueStatic } from "./beleg/models/StatueStatic";
 
 export default function Page() {
     return (
-        <div className="h-screen w-full bg-gray-900">
-            <Canvas camera={{ position: [0, 0, 10] }}>
-                <ambientLight intensity={0.5} />
-                <directionalLight position={[10, 10, 5]} intensity={1} />
-                <OrbitControls makeDefault />
-                <DragControls>
-                    <AboutMeForm />
-                </DragControls>
-                <Sky
-                    distance={450000}
-                    sunPosition={[10, -100, 100]}
-                    inclination={2}
-                    azimuth={0.5}
-                />
-
-                <Stars
-                    radius={100}
-                    depth={50}
-                    count={5000}
-                    factor={4}
-                    saturation={0}
-                    fade
-                    speed={1}
-                />
-                <EducationForm />
-                <DragControls>
-                    <Float
-                        speed={2} // Animation speed, defaults to 1
-                        rotationIntensity={1} // XYZ rotation intensity, defaults to 1
-                        floatIntensity={1} // Up/down float intensity, works like a multiplier with floatingRange,defaults to 1
-                        floatingRange={[1, 2]} // Range of y-axis values the object will float within, defaults to [-0.1,0.1]
-                    >
-                        <mesh />
-
-                        <group>
-                            <mesh position={[5, 5, 0]} castShadow>
-                                <octahedronGeometry />
-                                <MeshTransmissionMaterial color={"red"} />
-                            </mesh>
-                            <WorkFieldForm />
-                        </group>
-                    </Float>
-                </DragControls>
+        <div className="h-screen w-full">
+            <Canvas>
+                <Suspense fallback={null}>
+                    <ambientLight intensity={1} />
+                    <directionalLight position={[10, 10, 5]} intensity={1} />
+                    <CVForm />
+                </Suspense>
             </Canvas>
         </div>
+    );
+}
+
+function CVForm() {
+    const { width, height } = useThree((state) => state.viewport);
+
+    return (
+        <>
+            <ScrollControls damping={1} pages={2}>
+                <Scroll html>
+                    <CVElements />
+                </Scroll>
+                <Scroll>
+                    <Stars
+                        radius={200}
+                        depth={50}
+                        count={5000}
+                        factor={4}
+                        saturation={10}
+                        fade
+                        speed={1}
+                    />
+                    <Sparkles
+                        count={1000}
+                        scale={30}
+                        size={2}
+                        speed={1}
+                    ></Sparkles>
+                    <group position={[3.5, 2, 1]}>
+                        <mesh>
+                            <boxGeometry args={[1, 1, 0.5]} />
+                            <meshStandardMaterial color="#cd61ff" />
+                        </mesh>
+                    </group>
+
+                    <group position={[0, -5, 0]}>
+                        <mesh>
+                            <boxGeometry args={[1, 1, 1]} />
+                            <MeshTransmissionMaterial color="pink" />
+                        </mesh>
+                    </group>
+                </Scroll>
+            </ScrollControls>
+        </>
+    );
+}
+
+function CVElements() {
+    const scroll = useScroll();
+    const educationRef = useRef<HTMLDivElement>(null);
+    const aboutMeRef = useRef<HTMLDivElement>(null);
+    useFrame(() => {
+        const d = scroll.range(0, 1);
+        educationRef.current!.style.transform = `scale(${d})`;
+        aboutMeRef.current!.style.transform = `scale(${1 - d / 2})`;
+    });
+    return (
+        <>
+            <div className="flex w-screen justify-center">
+                <AboutMeForm ref={aboutMeRef} />
+            </div>
+            <EducationForm
+                ref={educationRef}
+                style={{
+                    position: "absolute",
+                    top: "100vh",
+                    left: "45vw",
+                    transform: "scale(1)",
+                }}
+            />
+        </>
     );
 }
