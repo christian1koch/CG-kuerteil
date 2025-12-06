@@ -69,8 +69,8 @@ function CVForm() {
 
                     <group position={[0, -5, 0]}>
                         <mesh>
-                            <boxGeometry args={[1, 1, 1]} />
-                            <MeshTransmissionMaterial color="pink" />
+                            <cylinderGeometry args={[1, 1, 1]} />
+                            <meshStandardMaterial color="#aeffb4" />
                         </mesh>
                     </group>
                 </Scroll>
@@ -93,15 +93,7 @@ function CVElements() {
             <div className="flex w-screen justify-center">
                 <AboutMeForm ref={aboutMeRef} />
             </div>
-            <EducationForm
-                ref={educationRef}
-                style={{
-                    position: "absolute",
-                    top: "100vh",
-                    left: "45vw",
-                    transform: "scale(1)",
-                }}
-            />
+            <EducationForm ref={educationRef} />
         </>
     );
 }
