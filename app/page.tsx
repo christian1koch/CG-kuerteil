@@ -20,6 +20,7 @@ import EducationForm from "./components/EducationForm";
 import { Suspense, useRef } from "react";
 import { Statue } from "./beleg/models/Statue";
 import { StatueStatic } from "./beleg/models/StatueStatic";
+import { TorusGeometry } from "three";
 
 export default function Page() {
     return (
@@ -73,6 +74,12 @@ function CVForm() {
                             <meshStandardMaterial color="#aeffb4" />
                         </mesh>
                     </group>
+                    <group position={[-3.5, -12, 0]}>
+                        <mesh>
+                            <coneGeometry args={[1, 1]} />
+                            <meshStandardMaterial color="#aef1ff" />
+                        </mesh>
+                    </group>
                 </Scroll>
             </ScrollControls>
         </>
@@ -90,9 +97,9 @@ function CVElements() {
         const education = scroll.range(0, 1 / 3);
         const work = scroll.range(2 / 3, 1 / 3);
         console.log(work, d);
-        aboutMeRef.current!.style.transform = `scale(${1 - about})`;
-        educationRef.current!.style.transform = `scale(${education - work})`;
-        workRef.current!.style.transform = `scale(${work})`;
+        aboutMeRef.current!.style.transform = `scale(${1 - about / 2})`;
+        educationRef.current!.style.transform = `scale(${education - work / 2})`;
+        workRef.current!.style.transform = `scale(${0.5 + work / 2})`;
     });
     return (
         <>
