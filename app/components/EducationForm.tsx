@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
     Card,
     CardContent,
@@ -12,6 +12,7 @@ import { Input } from "../../components/ui/input";
 import { Label } from "../../components/ui/label";
 import { EducationField } from "../beleg/Text/types";
 import { Button } from "@/components/ui/button";
+import { cvStorageService } from "../services/cvStorage";
 
 type EducationFormProps = React.ComponentPropsWithRef<"div">;
 
@@ -26,6 +27,21 @@ export function EducationForm(props: EducationFormProps) {
     const [educations, setEducations] = useState<EducationField[]>([
         emptyEducation,
     ]);
+    const [isLoaded, setIsLoaded] = useState(false);
+
+    useEffect(() => {
+        const saved = cvStorageService.getEducations();
+        if (saved && saved.length > 0) {
+            setEducations(saved);
+        }
+        setIsLoaded(true);
+    }, []);
+
+    useEffect(() => {
+        if (isLoaded) {
+            cvStorageService.saveEducations(educations);
+        }
+    }, [educations, isLoaded]);
 
     function addEducation() {
         setEducations((s) => [...s, { ...emptyEducation }]);
@@ -165,9 +181,7 @@ function EducationCard({
                         onChange={(e) =>
                             updateEducation({
                                 ...education,
-                                details: e.target.value
-                                    .split("\n")
-                                    .map((l) => l.trim()),
+                                details: e.target.value.split("\n"),
                             })
                         }
                         className="h-24 w-full resize-none rounded border p-2"
