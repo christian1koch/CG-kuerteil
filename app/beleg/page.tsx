@@ -6,8 +6,7 @@ import { Ref, Suspense, useEffect, useRef } from "react";
 import * as THREE from "three";
 import { InteractiveHouse } from "./InteractiveHouse";
 import { EffectComposer, Bloom } from "@react-three/postprocessing";
-
-const DEBUG_MODE = true;
+import { DEBUG_MODE } from "./constants";
 
 function Loader() {
     const { progress } = useProgress();
@@ -55,7 +54,7 @@ function SceneContainer() {
             />
             <pointLight
                 ref={(light) => {
-                    if (light) {
+                    if (light && DEBUG_MODE) {
                         const helper = new THREE.PointLightHelper(light, 1);
                         light.parent?.add(helper);
                     }

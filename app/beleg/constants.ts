@@ -1,6 +1,6 @@
 import { WorkExperienceField, EducationField, AboutMeField } from "./Text";
 
-export const DEBUG_MODE = true;
+export const DEBUG_MODE = false;
 
 export const ABOUT_ME_MOCK: AboutMeField = {
     text: "I am a passionate developer with a strong background in building scalable web applications. I love exploring new technologies and solving complex problems. In my free time, I enjoy hiking and photography.",

@@ -182,12 +182,14 @@ export function InteractiveHouse() {
                 dollySpeed={disableZoom ? 0 : 1}
                 truckSpeed={disableZoom ? 0 : 2}
             />
-            <NavigationHud
-                onAboutMeClick={() => setSelectedRoom(Spaces.Bedroom)}
-                onWorkExperienceClick={() => setSelectedRoom(Spaces.Office)}
-                onEducationClick={() => setSelectedRoom(Spaces.School)}
-                onContactMeClick={() => setSelectedRoom(Spaces.Garden)}
-            />
+            {selectedRoom !== Spaces.Initial && (
+                <NavigationHud
+                    onAboutMeClick={() => setSelectedRoom(Spaces.Bedroom)}
+                    onWorkExperienceClick={() => setSelectedRoom(Spaces.Office)}
+                    onEducationClick={() => setSelectedRoom(Spaces.School)}
+                    onContactMeClick={() => setSelectedRoom(Spaces.Garden)}
+                />
+            )}
             <WorkExperienceText
                 visible={selectedRoom === Spaces.Office}
                 fields={workExperiences}
@@ -296,7 +298,8 @@ export function InteractiveHouse() {
                 position={[-7, 1, -2]}
                 scale={0.6}
                 onClick={() => {
-                    window.location.href = "mailto:example@email.com";
+                    const email = cvStorageService.getEmail();
+                    window.location.href = `mailto:${email || "example@email.com"}`;
                 }}
             />
         </>
