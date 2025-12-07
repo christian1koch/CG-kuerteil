@@ -112,7 +112,7 @@ function CVElements() {
         contactRef.current!.style.transform = `scale(${0.5 + contact / 2})`;
     });
     return (
-        <div>
+        <>
             <div className="flex w-screen justify-center">
                 <AboutMeForm ref={aboutMeRef} />
             </div>
@@ -121,6 +121,6 @@ function CVElements() {
             <div className="flex w-screen justify-center">
                 <ContactMeForm ref={contactRef} />
             </div>
-        </div>
+        </>
     );
 }
