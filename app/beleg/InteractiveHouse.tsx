@@ -33,6 +33,7 @@ import { BlendFunction } from "postprocessing";
 import { Mailbox } from "./Mailbox";
 import { Briefcase } from "./models/Briefcase";
 import { Statue } from "./models/Statue";
+import { cvStorageService } from "../services/cvStorage";
 
 enum Spaces {
     Initial,
@@ -67,6 +68,41 @@ const Rotation: Record<Spaces, THREE.Euler> = {
 export function InteractiveHouse() {
     const [selectedRoom, setSelectedRoom] = useState<Spaces>(Spaces.Initial);
     const [disableZoom, setDisableZoom] = useState(false);
+
+    const [workExperiences, setWorkExperiences] = useState(
+        WORK_EXPERIENCE_MOCKS
+    );
+    const [educations, setEducations] = useState(EDUCATION_MOCKS);
+    const [aboutMe, setAboutMe] = useState(ABOUT_ME_MOCK);
+
+    useEffect(() => {
+        const storedWork = cvStorageService.getWorkExperiences();
+        const isWorkValid =
+            storedWork &&
+            storedWork.length > 0 &&
+            storedWork.every(
+                (w) => w.position.trim() !== "" && w.company.trim() !== ""
+            );
+        if (isWorkValid) {
+            setWorkExperiences(storedWork);
+        }
+
+        const storedEdu = cvStorageService.getEducations();
+        const isEduValid =
+            storedEdu &&
+            storedEdu.length > 0 &&
+            storedEdu.every(
+                (e) => e.degree.trim() !== "" && e.institution.trim() !== ""
+            );
+        if (isEduValid) {
+            setEducations(storedEdu);
+        }
+
+        const storedAboutMe = cvStorageService.getAboutMe();
+        if (storedAboutMe && storedAboutMe.trim() !== "") {
+            setAboutMe({ text: storedAboutMe });
+        }
+    }, []);
 
     const controlsRef = useRef<CameraControls>(null!);
     const meshRef = useRef<THREE.Mesh>(null!);
@@ -154,7 +190,7 @@ export function InteractiveHouse() {
             />
             <WorkExperienceText
                 visible={selectedRoom === Spaces.Office}
-                fields={WORK_EXPERIENCE_MOCKS}
+                fields={workExperiences}
                 onHoverChange={setDisableZoom}
                 position={[1.78, 1.7, -2.92]}
                 rotation={[Math.PI / 32, -Math.PI, 0]}
@@ -162,14 +198,14 @@ export function InteractiveHouse() {
             />
             <EducationText
                 visible={selectedRoom === Spaces.School}
-                fields={EDUCATION_MOCKS}
+                fields={educations}
                 onHoverChange={setDisableZoom}
                 position={[-5.5, 2.7, -2.4]}
                 rotation={[0, -Math.PI, 0]}
                 scale={0.2}
             />
             <AboutMeText
-                field={ABOUT_ME_MOCK}
+                field={aboutMe}
                 scale={0.3}
                 position={[-0.8, 3.2, -1.55]}
                 visible={selectedRoom === Spaces.Bedroom}
@@ -222,11 +258,11 @@ export function InteractiveHouse() {
                 >
                     <Sepia
                         intensity={0.5} // sepia intensity
-                        blendFunction={BlendFunction.LINEAR_BURN} // blend mode
+                        blendFunction={BlendFunction.DST} // blend mode
                     />
                     <BrightnessContrast
                         brightness={0.05} // brightness. min: -1, max: 1
-                        contrast={0.92} // contrast: min -1, max: 1
+                        contrast={0.5} // contrast: min -1, max: 1
                     />
                 </EffectComposer>
             )}
